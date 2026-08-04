@@ -1,0 +1,1 @@
+export function Progress({ value, label }: { value: number; label?: string }) { return <div className="progress-wrap" aria-label={label ?? `Avanzamento ${value}%`} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={value}><div className="progress-bar" style={{ width: `${Math.max(0, Math.min(100, value))}%` }} /></div>; }

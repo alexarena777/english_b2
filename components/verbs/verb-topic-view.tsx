@@ -17,6 +17,26 @@ import { Card } from "@/components/ui/card";
 
 const SESSION_SIZE = 8;
 
+// Mappa slug → ID YouTube (BBC Learning English)
+const YOUTUBE_IDS: Record<string, string> = {
+  "present-simple":             "lIW5BRgNXS4",
+  "present-continuous":         "wY-TlrqkXGE",
+  "present-perfect-simple":     "5hDEMSMN6ss",
+  "present-perfect-continuous": "B6z-4uXTN0E",
+  "past-simple":                "q0yOQfKE-xc",
+  "past-continuous":            "LtXmLiHCPjQ",
+  "past-perfect-simple":        "ZUiHNrqsxbA",
+  "past-perfect-continuous":    "38K9a_2rZ9o",
+  "will-future":                "OEX6mfNtkFc",
+  "be-going-to":                "UrVCT0RKWcs",
+  "present-continuous-future":  "wY-TlrqkXGE",
+  "future-continuous":          "OEX6mfNtkFc",
+  "future-perfect-simple":      "OEX6mfNtkFc",
+  "future-perfect-continuous":  "OEX6mfNtkFc",
+  "used-to-would":              "4X2mXFoEYJM",
+  "conditionals":               "NWxR7g7W3xk",
+};
+
 export function VerbTopicView({
   topic,
   exercises,
@@ -128,7 +148,7 @@ export function VerbTopicView({
       </div>
 
       {/* Video Lesson (if available) */}
-      {topic.youtubeId && (
+      {YOUTUBE_IDS[topic.slug] && (
         <Card style={{ padding: "20px", marginBottom: "24px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
             <Video size={18} color="var(--blue)" />
@@ -136,7 +156,7 @@ export function VerbTopicView({
           </div>
           <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", background: "#000" }}>
             <iframe
-              src={`https://www.youtube.com/embed/${topic.youtubeId}?rel=0`}
+              src={`https://www.youtube.com/embed/${YOUTUBE_IDS[topic.slug]}?rel=0`}
               style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

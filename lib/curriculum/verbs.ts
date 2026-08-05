@@ -617,7 +617,7 @@ function generatedVerbSeed(
 }
 
 export const verbTenseTopics: VerbTenseTopic[] = definitions.map(
-  ({ slug, title, italianTitle, category, formula, useCases, signals, examples, examplesIT, mistakes }) => ({
+  ({ slug, title, italianTitle, category, formula, useCases, signals, examples, examplesIT, mistakes, youtubeId }) => ({
     slug,
     title,
     italianTitle,
@@ -628,6 +628,7 @@ export const verbTenseTopics: VerbTenseTopic[] = definitions.map(
     examples,
     examplesIT,
     mistakes,
+    youtubeId,
   }),
 );
 

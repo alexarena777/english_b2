@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import {
   BookOpenCheck, Layers3, PlayCircle, ArrowDown,
-  ArrowLeft, ArrowRight, AlertTriangle, CheckCircle2, Zap
+  ArrowLeft, ArrowRight, AlertTriangle, CheckCircle2, Zap, Video
 } from "lucide-react";
 import type { Exercise } from "@/lib/types";
 import type { VerbTenseTopic } from "@/lib/curriculum/verbs";
@@ -126,6 +126,24 @@ export function VerbTopicView({
           </ul>
         </Card>
       </div>
+
+      {/* Video Lesson (if available) */}
+      {topic.youtubeId && (
+        <Card style={{ padding: "20px", marginBottom: "24px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+            <Video size={18} color="var(--blue)" />
+            <b style={{ fontSize: "13px" }}>Videolezione Rapida</b>
+          </div>
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", background: "#000" }}>
+            <iframe
+              src={`https://www.youtube.com/embed/${topic.youtubeId}?rel=0`}
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </Card>
+      )}
 
       {/* Examples with Italian translation */}
       <Card style={{ padding: "20px", marginBottom: "24px" }}>

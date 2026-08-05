@@ -22,6 +22,7 @@ export type VerbTenseTopic = {
   examples: string[];
   examplesIT: string[];
   mistakes: string[];
+  youtubeId?: string;
 };
 
 type VerbTopicDefinition = VerbTenseTopic & { seeds: VerbSeed[] };
@@ -38,6 +39,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["I usually work from home.", "The train leaves at 7.15."],
     examplesIT: ["Di solito lavoro da casa.", "Il treno parte alle 7:15."],
     mistakes: ["Dimenticare la -s alla terza persona.", "Usarlo per un'azione temporanea in corso."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "I usually ___ from home, but today I am at the office.", answer: "work", distractors: ["am working", "worked"], note: "Usually segnala un'abitudine." },
       { sentence: "My sister ___ two languages fluently.", answer: "speaks", distractors: ["is speaking", "speak"], note: "Una capacità stabile richiede il present simple." },
@@ -60,6 +62,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["She is talking to a client now.", "More people are working remotely."],
     examplesIT: ["Sta parlando con un cliente adesso.", "Sempre più persone lavorano da remoto."],
     mistakes: ["Dimenticare il verbo be.", "Usarlo normalmente con verbi di stato come know o believe."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "Please be quiet; I ___ to an important client.", answer: "am talking", distractors: ["talk", "have talked"], note: "L'azione è in corso nel momento in cui si parla." },
       { sentence: "We ___ with friends while our flat is being painted.", answer: "are staying", distractors: ["stay", "have stayed"], note: "È una sistemazione temporanea." },
@@ -82,6 +85,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["I have visited Dublin twice.", "She has finished the report."],
     examplesIT: ["Ho visitato Dublino due volte.", "Ha finito il rapporto."],
     mistakes: ["Usarlo con yesterday o last year.", "Confondere since, che introduce l'inizio, con for, che indica la durata."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "She ___ three reports so far today.", answer: "has written", distractors: ["wrote", "writes"], note: "So far today indica un periodo ancora aperto." },
       { sentence: "I ___ that film, so please do not tell me the ending.", answer: "have not seen", distractors: ["did not see", "do not see"], note: "L'esperienza manca fino al presente." },
@@ -104,6 +108,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["I have been studying for two hours.", "It has been raining."],
     examplesIT: ["Studio da due ore (e continuo).", "Sta piovendo da un po'."],
     mistakes: ["Usarlo con verbi di stato.", "Confonderlo con il simple quando conta soprattutto il risultato completato."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "They ___ for over an hour, so they need a break.", answer: "have been driving", distractors: ["are driving", "drove"], note: "L'enfasi è sulla durata dell'attività." },
       { sentence: "How long ___ English?", answer: "have you been studying", distractors: ["do you study", "did you study"], note: "How long chiede una durata fino al presente." },
@@ -126,6 +131,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["We moved here last year.", "Did you call her?"],
     examplesIT: ["Ci siamo trasferiti qui l'anno scorso.", "L'hai chiamata?"],
     mistakes: ["Usare il participio dopo did.", "Usarlo per una situazione che continua ancora adesso."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "We ___ the museum before it closed for renovation.", answer: "visited", distractors: ["have visited", "were visiting"], note: "L'evento è concluso in un periodo passato finito." },
       { sentence: "I ___ your message yesterday evening.", answer: "received", distractors: ["have received", "receive"], note: "Yesterday richiede il past simple." },
@@ -148,6 +154,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["I was cooking when you called.", "While she was reading, he was working."],
     examplesIT: ["Stavo cucinando quando hai chiamato.", "Mentre lei leggeva, lui lavorava."],
     mistakes: ["Usarlo per l'evento breve che interrompe.", "Dimenticare la concordanza was/were."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "While I ___ dinner, the lights went out.", answer: "was making", distractors: ["made", "have made"], note: "L'azione lunga fa da sfondo all'evento breve." },
       { sentence: "At nine last night, we ___ home.", answer: "were driving", distractors: ["drove", "have driven"], note: "L'azione era in corso a un momento preciso del passato." },
@@ -170,6 +177,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["The film had started before we arrived.", "She had never flown before."],
     examplesIT: ["Il film era già iniziato prima che arrivassimo.", "Non aveva mai volato prima."],
     mistakes: ["Usarlo quando l'ordine degli eventi è già evidente e non serve enfasi.", "Usare had + past simple invece del participio."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "By the time we arrived, the film ___.", answer: "had already started", distractors: ["already started", "has already started"], note: "L'inizio precede il nostro arrivo, entrambi nel passato." },
       { sentence: "She was nervous because she ___ abroad before.", answer: "had never travelled", distractors: ["never travelled", "has never travelled"], note: "L'assenza di esperienza precede il momento in cui era nervosa." },
@@ -192,6 +200,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["They had been waiting for an hour when the bus came.", "She was tired because she had been working."],
     examplesIT: ["Aspettavano da un'ora quando arrivò il bus.", "Era stanca perché aveva lavorato a lungo."],
     mistakes: ["Usarlo con verbi di stato.", "Usarlo quando conta soltanto il risultato completato."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "They ___ for an hour when the bus finally arrived.", answer: "had been waiting", distractors: ["were waiting", "have been waiting"], note: "L'attesa dura fino a un punto nel passato." },
       { sentence: "Her eyes were tired because she ___ at the screen all day.", answer: "had been looking", distractors: ["was looking", "has looked"], note: "L'attività precedente spiega il risultato visibile passato." },
@@ -214,6 +223,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["I'll answer the phone.", "I think prices will rise."],
     examplesIT: ["Rispondo io al telefono.", "Penso che i prezzi aumenteranno."],
     mistakes: ["Usarlo per un piano già deciso.", "Aggiungere to dopo will."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "The phone is ringing. I ___ it.", answer: "will answer", distractors: ["am answering yesterday", "answer usually"], note: "La decisione viene presa mentre si parla." },
       { sentence: "I think the new system ___ time.", answer: "will save", distractors: ["is saving last week", "has saved tomorrow"], note: "I think introduce una previsione personale." },
@@ -236,6 +246,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["I'm going to apply for the job.", "Look! It's going to rain."],
     examplesIT: ["Ho intenzione di candidarmi per il lavoro.", "Guarda! Sta per piovere."],
     mistakes: ["Dimenticare il verbo be.", "Usarlo per una decisione davvero spontanea."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "Look at those clouds! It ___.", answer: "is going to rain", distractors: ["rains yesterday", "has raining"], note: "La previsione è basata su un'evidenza visibile." },
       { sentence: "I ___ a digital marketing course next month.", answer: "am going to start", distractors: ["will started", "going start"], note: "L'intenzione è già stata decisa." },
@@ -258,6 +269,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["I'm meeting Sara at six.", "We're flying to Lisbon on Friday."],
     examplesIT: ["Incontro Sara alle sei (è già deciso).", "Voliamo a Lisbona venerdì (biglietti prenotati)."],
     mistakes: ["Usarlo senza un riferimento futuro chiaro.", "Confonderlo con going to, che può indicare un'intenzione meno fissata."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "I ___ the dentist at three tomorrow.", answer: "am seeing", distractors: ["see every day", "have seen tomorrow"], note: "L'appuntamento è fissato a un'ora precisa." },
       { sentence: "We ___ to Lisbon on Friday; the tickets are booked.", answer: "are flying", distractors: ["fly usually", "have flown Friday"], note: "La prenotazione rende l'accordo definito." },
@@ -280,6 +292,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["This time tomorrow, we'll be flying.", "Will you be using the car?"],
     examplesIT: ["Domani a quest'ora staremo volando.", "Userai la macchina?"],
     mistakes: ["Usarlo per un'azione completata entro una scadenza.", "Dimenticare be dopo will."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "This time tomorrow, we ___ over the Atlantic.", answer: "will be flying", distractors: ["will have flown", "are flew"], note: "L'azione sarà in corso in un preciso momento futuro." },
       { sentence: "At eight tonight, I ___ the webinar.", answer: "will be watching", distractors: ["will have watched", "watch yesterday"], note: "L'attività sarà in svolgimento alle otto." },
@@ -302,6 +315,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["By Friday, I will have finished.", "They will have left before noon."],
     examplesIT: ["Entro venerdì avrò finito.", "Saranno partiti prima di mezzogiorno."],
     mistakes: ["Usarlo per un'azione semplicemente in corso nel futuro.", "Usare il past simple dopo will have."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "By Friday, I ___ the report.", answer: "will have finished", distractors: ["will be finishing", "have finish"], note: "By Friday fissa una scadenza entro cui il risultato sarà completo." },
       { sentence: "They ___ by the time we arrive.", answer: "will have left", distractors: ["will be leaving now", "have leave"], note: "La partenza sarà anteriore al nostro arrivo futuro." },
@@ -324,6 +338,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["By June, I'll have been working here for a year.", "They'll have been travelling for ten hours."],
     examplesIT: ["A giugno sarà un anno che lavoro qui.", "Avranno viaggiato per dieci ore."],
     mistakes: ["Usarlo con verbi di stato.", "Usarlo quando interessa soltanto il risultato completato."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "By June, I ___ here for a year.", answer: "will have been working", distractors: ["will be worked", "have work"], note: "La frase misura la durata fino a giugno." },
       { sentence: "When we land, we ___ for twelve hours.", answer: "will have been travelling", distractors: ["will travel yesterday", "have travelled now"], note: "Il viaggio continuerà fino al momento dell'atterraggio." },
@@ -346,6 +361,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["I used to live near the sea.", "Every summer, we would camp there."],
     examplesIT: ["Una volta abitavo vicino al mare.", "Ogni estate andavamo in campeggio lì."],
     mistakes: ["Usare would per stati come know, own o be.", "Confondere used to con be used to + -ing."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "I ___ live near the station, but I moved last year.", answer: "used to", distractors: ["am used to", "would be"], note: "Descrive uno stato passato non più vero." },
       { sentence: "Every summer, my grandfather ___ take us fishing.", answer: "would", distractors: ["used being", "was used to"], note: "Would descrive un'azione ripetuta in un racconto passato." },
@@ -368,6 +384,7 @@ const definitions: VerbTopicDefinition[] = [
     examples: ["If you heat ice, it melts.", "If I had known, I would have called."],
     examplesIT: ["Se scaldi il ghiaccio, si scioglie.", "Se l'avessi saputo, avrei chiamato."],
     mistakes: ["Usare will nella if-clause standard.", "Confondere il secondo e il terzo condizionale."],
+    youtubeId: "L9AWrJuqaQA",
     seeds: [
       { sentence: "If you heat ice, it ___.", answer: "melts", distractors: ["will melt", "would melt"], note: "Lo zero conditional descrive una verità generale." },
       { sentence: "If the weather improves, we ___ for a walk.", answer: "will go", distractors: ["would go", "went"], note: "È una possibilità reale futura: first conditional." },

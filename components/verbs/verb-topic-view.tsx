@@ -17,24 +17,24 @@ import { Card } from "@/components/ui/card";
 
 const SESSION_SIZE = 8;
 
-// Mappa slug → ID YouTube (BBC Learning English)
+// Mappa slug → ID YouTube (JoEnglish)
 const YOUTUBE_IDS: Record<string, string> = {
-  "present-simple":             "OsW5sV3GMDM", // Present Simple vs Continuous
-  "present-continuous":         "OsW5sV3GMDM", // Present Simple vs Continuous
-  "present-perfect-simple":     "R_J78Gg-S4s", // Present perfect
-  "present-perfect-continuous": "R_J78Gg-S4s", 
-  "past-simple":                "mF8y3r3yQnE", // Actually past, need to update if needed, just placeholder for now
-  "past-continuous":            "mF8y3r3yQnE",
-  "past-perfect-simple":        "mF8y3r3yQnE",
-  "past-perfect-continuous":    "mF8y3r3yQnE",
-  "will-future":                "mF8y3r3yQnE", // Going to & Present Continuous for future
-  "be-going-to":                "mF8y3r3yQnE",
-  "present-continuous-future":  "mF8y3r3yQnE",
-  "future-continuous":          "mF8y3r3yQnE",
-  "future-perfect-simple":      "mF8y3r3yQnE",
-  "future-perfect-continuous":  "mF8y3r3yQnE",
-  "used-to-would":              "mF8y3r3yQnE",
-  "conditionals":               "mF8y3r3yQnE",
+  "present-simple":             "Cmzc88Umoz4", // SCOMMETTO che fai questo ERRORE con IL PRESENT SIMPLE!
+  "present-continuous":         "i1Wfrnyld-8", // I TEMPI INGLESI - Part 1 - PRESENT
+  "present-perfect-simple":     "fCeetsOARcg", // Past Simple V Present Perfect
+  "present-perfect-continuous": "fCeetsOARcg", 
+  "past-simple":                "fCeetsOARcg",
+  "past-continuous":            "fCeetsOARcg",
+  "past-perfect-simple":        "fCeetsOARcg",
+  "past-perfect-continuous":    "fCeetsOARcg",
+  "will-future":                "fT_xihRXrkc", // Il FUTURO in inglese spiegato BENE
+  "be-going-to":                "fT_xihRXrkc",
+  "present-continuous-future":  "fT_xihRXrkc",
+  "future-continuous":          "fT_xihRXrkc",
+  "future-perfect-simple":      "fT_xihRXrkc",
+  "future-perfect-continuous":  "fT_xihRXrkc",
+  "used-to-would":              "fCeetsOARcg",
+  "conditionals":               "fXxVfeR8nZU", // I CONDIZIONALI in Inglese
 };
 
 export function VerbTopicView({

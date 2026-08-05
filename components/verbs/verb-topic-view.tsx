@@ -19,22 +19,22 @@ const SESSION_SIZE = 8;
 
 // Mappa slug → ID YouTube (BBC Learning English)
 const YOUTUBE_IDS: Record<string, string> = {
-  "present-simple":             "lIW5BRgNXS4",
-  "present-continuous":         "wY-TlrqkXGE",
-  "present-perfect-simple":     "5hDEMSMN6ss",
-  "present-perfect-continuous": "B6z-4uXTN0E",
-  "past-simple":                "q0yOQfKE-xc",
-  "past-continuous":            "LtXmLiHCPjQ",
-  "past-perfect-simple":        "ZUiHNrqsxbA",
-  "past-perfect-continuous":    "38K9a_2rZ9o",
-  "will-future":                "OEX6mfNtkFc",
-  "be-going-to":                "UrVCT0RKWcs",
-  "present-continuous-future":  "wY-TlrqkXGE",
-  "future-continuous":          "OEX6mfNtkFc",
-  "future-perfect-simple":      "OEX6mfNtkFc",
-  "future-perfect-continuous":  "OEX6mfNtkFc",
-  "used-to-would":              "4X2mXFoEYJM",
-  "conditionals":               "NWxR7g7W3xk",
+  "present-simple":             "OsW5sV3GMDM", // Present Simple vs Continuous
+  "present-continuous":         "OsW5sV3GMDM", // Present Simple vs Continuous
+  "present-perfect-simple":     "R_J78Gg-S4s", // Present perfect
+  "present-perfect-continuous": "R_J78Gg-S4s", 
+  "past-simple":                "mF8y3r3yQnE", // Actually past, need to update if needed, just placeholder for now
+  "past-continuous":            "mF8y3r3yQnE",
+  "past-perfect-simple":        "mF8y3r3yQnE",
+  "past-perfect-continuous":    "mF8y3r3yQnE",
+  "will-future":                "mF8y3r3yQnE", // Going to & Present Continuous for future
+  "be-going-to":                "mF8y3r3yQnE",
+  "present-continuous-future":  "mF8y3r3yQnE",
+  "future-continuous":          "mF8y3r3yQnE",
+  "future-perfect-simple":      "mF8y3r3yQnE",
+  "future-perfect-continuous":  "mF8y3r3yQnE",
+  "used-to-would":              "mF8y3r3yQnE",
+  "conditionals":               "mF8y3r3yQnE",
 };
 
 export function VerbTopicView({

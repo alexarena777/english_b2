@@ -1,7 +1,7 @@
 import { ExamRunPageClient } from "@/components/exams/exam-run-client";
 
 export function generateStaticParams() {
-  return [{ id: "short-1" }, { id: "full-1" }];
+  return [{ id: "short-1" }, { id: "full-1" }, { id: "uni-1" }];
 }
 
 export default async function ExamRunPage({

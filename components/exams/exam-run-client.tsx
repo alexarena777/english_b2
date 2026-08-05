@@ -12,6 +12,7 @@ import {
   readingPassages,
   vocabularyExercises,
 } from "@/lib/data";
+import { universityExamExercises } from "@/lib/curriculum/uni-exam-data";
 
 function examQuestions(full: boolean) {
   const reading = readingPassages.flatMap((passage) => passage.exercises);
@@ -32,12 +33,14 @@ function examQuestions(full: boolean) {
 }
 
 export function ExamRunPageClient({ id }: { id: string }) {
+  const isUni = id === "uni-1";
   const full = id.startsWith("full");
   const [started, setStarted] = useState(false);
   const [ready, setReady] = useState(false);
-  const questions = examQuestions(full);
-  const title = full ? "Simulazione estesa" : "Simulazione breve";
-  const minutes = full ? 105 : 35;
+  
+  const questions = isUni ? universityExamExercises : examQuestions(full);
+  const title = isUni ? "Simulazione Universitaria" : full ? "Simulazione estesa" : "Simulazione breve";
+  const minutes = isUni ? 45 : full ? 105 : 35;
 
   useEffect(() => {
     queueMicrotask(() => setReady(true));

@@ -33,6 +33,14 @@ const exams = [
     sections: 5,
     description: "Una prova completa con navigazione libera e report dettagliato per area.",
   },
+  {
+    id: "uni-1",
+    title: "Simulazione Universitaria",
+    duration: "45 min",
+    questions: 30,
+    sections: 1,
+    description: "Test Grammar Quiz Ufficiale B2 (30 domande a risposta multipla).",
+  },
 ];
 
 export default function ExamPage() {
@@ -58,9 +66,10 @@ export default function ExamPage() {
       </div>
       <div className="exam-grid">
         {exams.map((exam, index) => (
-          <Card className={`exam-card ${index === 1 ? "featured" : ""}`} key={exam.id}>
-            {index === 1 && <Badge variant="success">PROVA ESTESA</Badge>}
-            <span className="exam-icon">{index === 1 ? <FileText /> : <Clock3 />}</span>
+          <Card className={`exam-card ${exam.id === "full-1" ? "featured" : ""}`} key={exam.id}>
+            {exam.id === "full-1" && <Badge variant="success">PROVA ESTESA</Badge>}
+            {exam.id === "uni-1" && <Badge variant="neutral">UFFICIALE</Badge>}
+            <span className="exam-icon">{exam.id === "full-1" ? <FileText /> : <Clock3 />}</span>
             <h2>{exam.title}</h2>
             <p>{exam.description}</p>
             <div className="exam-details">
@@ -68,7 +77,7 @@ export default function ExamPage() {
               <span><CheckCircle2 /> {exam.questions} domande</span>
               <span><Headphones /> {exam.sections} sezioni</span>
             </div>
-            <Button asChild variant={index === 1 ? "default" : "outline"}>
+            <Button asChild variant={exam.id === "full-1" ? "default" : "outline"}>
               <Link href={`/exam/${exam.id}`}>Vedi istruzioni <ArrowRight size={17} /></Link>
             </Button>
           </Card>

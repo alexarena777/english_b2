@@ -9,14 +9,18 @@ type VerbSeed = {
   note: string;
 };
 
+export type VerbCategory = "Presenti" | "Passati" | "Futuri" | "Forme speciali";
+
 export type VerbTenseTopic = {
   slug: string;
   title: string;
   italianTitle: string;
+  category: VerbCategory;
   formula: string;
   useCases: string[];
   signals: string[];
   examples: string[];
+  examplesIT: string[];
   mistakes: string[];
 };
 
@@ -27,10 +31,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "present-simple",
     title: "Present simple",
     italianTitle: "Presente semplice",
+    category: "Presenti",
     formula: "soggetto + verbo base; he/she/it + -s",
     useCases: ["abitudini e routine", "fatti stabili e verità generali", "orari e programmi ufficiali"],
     signals: ["usually", "often", "every", "rarely", "never"],
     examples: ["I usually work from home.", "The train leaves at 7.15."],
+    examplesIT: ["Di solito lavoro da casa.", "Il treno parte alle 7:15."],
     mistakes: ["Dimenticare la -s alla terza persona.", "Usarlo per un'azione temporanea in corso."],
     seeds: [
       { sentence: "I usually ___ from home, but today I am at the office.", answer: "work", distractors: ["am working", "worked"], note: "Usually segnala un'abitudine." },
@@ -47,10 +53,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "present-continuous",
     title: "Present continuous",
     italianTitle: "Presente progressivo",
+    category: "Presenti",
     formula: "am/is/are + verbo in -ing",
     useCases: ["azione in corso ora", "situazione temporanea", "cambiamento o tendenza attuale"],
     signals: ["now", "at the moment", "currently", "this week", "increasingly"],
     examples: ["She is talking to a client now.", "More people are working remotely."],
+    examplesIT: ["Sta parlando con un cliente adesso.", "Sempre più persone lavorano da remoto."],
     mistakes: ["Dimenticare il verbo be.", "Usarlo normalmente con verbi di stato come know o believe."],
     seeds: [
       { sentence: "Please be quiet; I ___ to an important client.", answer: "am talking", distractors: ["talk", "have talked"], note: "L'azione è in corso nel momento in cui si parla." },
@@ -67,10 +75,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "present-perfect-simple",
     title: "Present perfect simple",
     italianTitle: "Passato collegato al presente",
+    category: "Presenti",
     formula: "have/has + participio passato",
     useCases: ["esperienze senza tempo passato definito", "risultati presenti", "azioni in periodi non conclusi"],
     signals: ["already", "yet", "ever", "never", "so far", "since", "for"],
     examples: ["I have visited Dublin twice.", "She has finished the report."],
+    examplesIT: ["Ho visitato Dublino due volte.", "Ha finito il rapporto."],
     mistakes: ["Usarlo con yesterday o last year.", "Confondere since, che introduce l'inizio, con for, che indica la durata."],
     seeds: [
       { sentence: "She ___ three reports so far today.", answer: "has written", distractors: ["wrote", "writes"], note: "So far today indica un periodo ancora aperto." },
@@ -87,10 +97,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "present-perfect-continuous",
     title: "Present perfect continuous",
     italianTitle: "Durata fino al presente",
+    category: "Presenti",
     formula: "have/has been + verbo in -ing",
     useCases: ["attività iniziata nel passato e ancora in corso", "durata messa in evidenza", "causa visibile nel presente"],
     signals: ["for", "since", "all day", "lately", "how long"],
     examples: ["I have been studying for two hours.", "It has been raining."],
+    examplesIT: ["Studio da due ore (e continuo).", "Sta piovendo da un po'."],
     mistakes: ["Usarlo con verbi di stato.", "Confonderlo con il simple quando conta soprattutto il risultato completato."],
     seeds: [
       { sentence: "They ___ for over an hour, so they need a break.", answer: "have been driving", distractors: ["are driving", "drove"], note: "L'enfasi è sulla durata dell'attività." },
@@ -107,10 +119,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "past-simple",
     title: "Past simple",
     italianTitle: "Passato semplice",
+    category: "Passati",
     formula: "verbo al passato; did + verbo base nelle domande e negazioni",
     useCases: ["evento concluso in un tempo passato finito", "sequenza narrativa", "abitudine passata conclusa"],
     signals: ["yesterday", "last", "ago", "in 2024", "when"],
     examples: ["We moved here last year.", "Did you call her?"],
+    examplesIT: ["Ci siamo trasferiti qui l'anno scorso.", "L'hai chiamata?"],
     mistakes: ["Usare il participio dopo did.", "Usarlo per una situazione che continua ancora adesso."],
     seeds: [
       { sentence: "We ___ the museum before it closed for renovation.", answer: "visited", distractors: ["have visited", "were visiting"], note: "L'evento è concluso in un periodo passato finito." },
@@ -127,10 +141,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "past-continuous",
     title: "Past continuous",
     italianTitle: "Azione in corso nel passato",
+    category: "Passati",
     formula: "was/were + verbo in -ing",
     useCases: ["azione in corso a un'ora passata", "sfondo narrativo", "due azioni contemporanee"],
     signals: ["while", "as", "at 8 p.m.", "when"],
     examples: ["I was cooking when you called.", "While she was reading, he was working."],
+    examplesIT: ["Stavo cucinando quando hai chiamato.", "Mentre lei leggeva, lui lavorava."],
     mistakes: ["Usarlo per l'evento breve che interrompe.", "Dimenticare la concordanza was/were."],
     seeds: [
       { sentence: "While I ___ dinner, the lights went out.", answer: "was making", distractors: ["made", "have made"], note: "L'azione lunga fa da sfondo all'evento breve." },
@@ -147,10 +163,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "past-perfect-simple",
     title: "Past perfect simple",
     italianTitle: "Il passato prima del passato",
+    category: "Passati",
     formula: "had + participio passato",
     useCases: ["azione precedente a un'altra azione passata", "causa di una situazione passata", "esperienza anteriore a un riferimento passato"],
     signals: ["by the time", "already", "before", "after", "never"],
     examples: ["The film had started before we arrived.", "She had never flown before."],
+    examplesIT: ["Il film era già iniziato prima che arrivassimo.", "Non aveva mai volato prima."],
     mistakes: ["Usarlo quando l'ordine degli eventi è già evidente e non serve enfasi.", "Usare had + past simple invece del participio."],
     seeds: [
       { sentence: "By the time we arrived, the film ___.", answer: "had already started", distractors: ["already started", "has already started"], note: "L'inizio precede il nostro arrivo, entrambi nel passato." },
@@ -167,10 +185,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "past-perfect-continuous",
     title: "Past perfect continuous",
     italianTitle: "Durata prima di un momento passato",
+    category: "Passati",
     formula: "had been + verbo in -ing",
     useCases: ["attività durata fino a un punto passato", "causa visibile di una situazione passata", "processo interrotto nel passato"],
     signals: ["for", "since", "all morning", "before", "when"],
     examples: ["They had been waiting for an hour when the bus came.", "She was tired because she had been working."],
+    examplesIT: ["Aspettavano da un'ora quando arrivò il bus.", "Era stanca perché aveva lavorato a lungo."],
     mistakes: ["Usarlo con verbi di stato.", "Usarlo quando conta soltanto il risultato completato."],
     seeds: [
       { sentence: "They ___ for an hour when the bus finally arrived.", answer: "had been waiting", distractors: ["were waiting", "have been waiting"], note: "L'attesa dura fino a un punto nel passato." },
@@ -187,10 +207,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "will-future",
     title: "Future with will",
     italianTitle: "Futuro con will",
+    category: "Futuri",
     formula: "will + verbo base",
     useCases: ["decisione presa nel momento", "promessa o offerta", "previsione basata su opinione"],
     signals: ["I think", "probably", "perhaps", "I promise", "do not worry"],
     examples: ["I'll answer the phone.", "I think prices will rise."],
+    examplesIT: ["Rispondo io al telefono.", "Penso che i prezzi aumenteranno."],
     mistakes: ["Usarlo per un piano già deciso.", "Aggiungere to dopo will."],
     seeds: [
       { sentence: "The phone is ringing. I ___ it.", answer: "will answer", distractors: ["am answering yesterday", "answer usually"], note: "La decisione viene presa mentre si parla." },
@@ -207,10 +229,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "be-going-to",
     title: "Be going to",
     italianTitle: "Intenzioni e previsioni con evidenza",
+    category: "Futuri",
     formula: "am/is/are going to + verbo base",
     useCases: ["intenzione già decisa", "piano generale", "previsione basata su evidenza presente"],
     signals: ["look", "plan", "intend", "this year", "those clouds"],
     examples: ["I'm going to apply for the job.", "Look! It's going to rain."],
+    examplesIT: ["Ho intenzione di candidarmi per il lavoro.", "Guarda! Sta per piovere."],
     mistakes: ["Dimenticare il verbo be.", "Usarlo per una decisione davvero spontanea."],
     seeds: [
       { sentence: "Look at those clouds! It ___.", answer: "is going to rain", distractors: ["rains yesterday", "has raining"], note: "La previsione è basata su un'evidenza visibile." },
@@ -227,10 +251,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "present-continuous-future",
     title: "Present continuous for arrangements",
     italianTitle: "Accordi futuri già fissati",
+    category: "Futuri",
     formula: "am/is/are + verbo in -ing + riferimento futuro",
     useCases: ["appuntamento confermato", "viaggio prenotato", "accordo con altre persone"],
     signals: ["tomorrow", "on Friday", "at 6", "this weekend"],
     examples: ["I'm meeting Sara at six.", "We're flying to Lisbon on Friday."],
+    examplesIT: ["Incontro Sara alle sei (è già deciso).", "Voliamo a Lisbona venerdì (biglietti prenotati)."],
     mistakes: ["Usarlo senza un riferimento futuro chiaro.", "Confonderlo con going to, che può indicare un'intenzione meno fissata."],
     seeds: [
       { sentence: "I ___ the dentist at three tomorrow.", answer: "am seeing", distractors: ["see every day", "have seen tomorrow"], note: "L'appuntamento è fissato a un'ora precisa." },
@@ -247,10 +273,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "future-continuous",
     title: "Future continuous",
     italianTitle: "Azione in corso nel futuro",
+    category: "Futuri",
     formula: "will be + verbo in -ing",
     useCases: ["azione in corso a un momento futuro", "evento previsto come parte di una routine", "domanda cortese sui programmi"],
     signals: ["this time tomorrow", "at 8 tomorrow", "all afternoon"],
     examples: ["This time tomorrow, we'll be flying.", "Will you be using the car?"],
+    examplesIT: ["Domani a quest'ora staremo volando.", "Userai la macchina?"],
     mistakes: ["Usarlo per un'azione completata entro una scadenza.", "Dimenticare be dopo will."],
     seeds: [
       { sentence: "This time tomorrow, we ___ over the Atlantic.", answer: "will be flying", distractors: ["will have flown", "are flew"], note: "L'azione sarà in corso in un preciso momento futuro." },
@@ -267,10 +295,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "future-perfect-simple",
     title: "Future perfect simple",
     italianTitle: "Azione completata entro il futuro",
+    category: "Futuri",
     formula: "will have + participio passato",
     useCases: ["azione completata entro una scadenza futura", "risultato raggiunto prima di un evento futuro", "quantità accumulata entro il futuro"],
     signals: ["by", "by the time", "before", "within"],
     examples: ["By Friday, I will have finished.", "They will have left before noon."],
+    examplesIT: ["Entro venerdì avrò finito.", "Saranno partiti prima di mezzogiorno."],
     mistakes: ["Usarlo per un'azione semplicemente in corso nel futuro.", "Usare il past simple dopo will have."],
     seeds: [
       { sentence: "By Friday, I ___ the report.", answer: "will have finished", distractors: ["will be finishing", "have finish"], note: "By Friday fissa una scadenza entro cui il risultato sarà completo." },
@@ -287,10 +317,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "future-perfect-continuous",
     title: "Future perfect continuous",
     italianTitle: "Durata fino a un momento futuro",
+    category: "Futuri",
     formula: "will have been + verbo in -ing",
     useCases: ["durata di un'attività fino a un punto futuro", "processo continuato prima di un risultato futuro", "enfasi sul tempo trascorso"],
     signals: ["for ... by", "by next month", "when"],
     examples: ["By June, I'll have been working here for a year.", "They'll have been travelling for ten hours."],
+    examplesIT: ["A giugno sarà un anno che lavoro qui.", "Avranno viaggiato per dieci ore."],
     mistakes: ["Usarlo con verbi di stato.", "Usarlo quando interessa soltanto il risultato completato."],
     seeds: [
       { sentence: "By June, I ___ here for a year.", answer: "will have been working", distractors: ["will be worked", "have work"], note: "La frase misura la durata fino a giugno." },
@@ -307,10 +339,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "used-to-would",
     title: "Used to and would",
     italianTitle: "Abitudini e stati passati",
+    category: "Forme speciali",
     formula: "used to + verbo; would + verbo per azioni ripetute",
     useCases: ["abitudine passata non più vera", "stato passato cambiato", "azione ripetuta in un racconto"],
     signals: ["when I was", "in those days", "every summer", "before"],
     examples: ["I used to live near the sea.", "Every summer, we would camp there."],
+    examplesIT: ["Una volta abitavo vicino al mare.", "Ogni estate andavamo in campeggio lì."],
     mistakes: ["Usare would per stati come know, own o be.", "Confondere used to con be used to + -ing."],
     seeds: [
       { sentence: "I ___ live near the station, but I moved last year.", answer: "used to", distractors: ["am used to", "would be"], note: "Descrive uno stato passato non più vero." },
@@ -327,10 +361,12 @@ const definitions: VerbTopicDefinition[] = [
     slug: "conditionals",
     title: "Conditional forms",
     italianTitle: "Periodo ipotetico completo",
+    category: "Forme speciali",
     formula: "zero, first, second, third e mixed conditionals",
     useCases: ["verità generali", "possibilità reali", "ipotesi presenti", "rimpianti passati", "risultati presenti di cause passate"],
     signals: ["if", "unless", "provided", "as long as", "would"],
     examples: ["If you heat ice, it melts.", "If I had known, I would have called."],
+    examplesIT: ["Se scaldi il ghiaccio, si scioglie.", "Se l'avessi saputo, avrei chiamato."],
     mistakes: ["Usare will nella if-clause standard.", "Confondere il secondo e il terzo condizionale."],
     seeds: [
       { sentence: "If you heat ice, it ___.", answer: "melts", distractors: ["will melt", "would melt"], note: "Lo zero conditional descrive una verità generale." },
@@ -564,75 +600,72 @@ function generatedVerbSeed(
 }
 
 export const verbTenseTopics: VerbTenseTopic[] = definitions.map(
-  ({ slug, title, italianTitle, formula, useCases, signals, examples, mistakes }) => ({
+  ({ slug, title, italianTitle, category, formula, useCases, signals, examples, examplesIT, mistakes }) => ({
     slug,
     title,
     italianTitle,
+    category,
     formula,
     useCases,
     signals,
     examples,
+    examplesIT,
     mistakes,
   }),
 );
 
+const EXERCISE_TYPES = ["multiple-choice", "fill-gap", "error-correction", "verb-tense"] as const;
+
 const coreVerbTenseExercises: Exercise[] = definitions.flatMap(
   (topic, topicIndex) =>
-    topic.seeds.flatMap((seed, seedIndex) => {
+    topic.seeds.map((seed, seedIndex) => {
+      // Each seed gets ONE exercise type, rotating through all 4 types across seeds.
+      // This ensures all 8 sentences are different - no sentence is repeated.
+      const typeIndex = (topicIndex + seedIndex) % EXERCISE_TYPES.length;
+      const type = EXERCISE_TYPES[typeIndex];
+
       const labels = [seed.answer, ...seed.distractors];
       const offset = (topicIndex + seedIndex) % labels.length;
       const options = [...labels.slice(offset), ...labels.slice(0, offset)].map(
         (label, optionIndex) => ({ id: String(optionIndex), label }),
       );
-      const base = {
+
+      const incorrectSentence = seed.sentence.replace("___", seed.distractors[0]);
+      const question = type === "error-correction" ? incorrectSentence : seed.sentence;
+
+      const instructions =
+        type === "multiple-choice"
+          ? "Scegli la forma verbale corretta per il contesto."
+          : type === "fill-gap"
+            ? "Scrivi la forma verbale completa, senza abbreviazioni."
+            : type === "error-correction"
+              ? "La forma verbale nella frase non è adatta al contesto. Scrivi soltanto la forma corretta."
+              : `Completa senza opzioni. Prima individua il rapporto temporale, poi applica ${topic.title}.`;
+
+      const estimatedTime =
+        type === "multiple-choice" ? 45 : type === "fill-gap" ? 60 : type === "error-correction" ? 65 : 75;
+
+      const number = String(seedIndex + 1).padStart(2, "0");
+
+      return {
+        id: `verb-${topic.slug}-${number}-${type}`,
+        type,
         section: "grammar" as const,
         topic: topic.title,
         difficulty: "b2" as const,
         level: "B2" as const,
-        question: seed.sentence,
+        question,
+        instructions,
+        options: type === "multiple-choice" ? options : undefined,
         correctAnswer: seed.answer,
         explanation: seed.note,
         grammarRule: `${topic.formula}. ${topic.useCases.join("; ")}.`,
         examples: topic.examples.map((english) => ({ english })),
         tags: ["verbs", "b2", topic.slug],
-        estimatedTime: 45,
+        estimatedTime,
         source: "original" as const,
         createdAt,
-      };
-      const number = String(seedIndex + 1).padStart(2, "0");
-      const incorrectSentence = seed.sentence.replace("___", seed.distractors[0]);
-      return [
-        {
-          ...base,
-          id: `verb-${topic.slug}-${number}-choice`,
-          type: "multiple-choice" as const,
-          instructions: "Scegli la forma verbale corretta per il contesto.",
-          options,
-        },
-        {
-          ...base,
-          id: `verb-${topic.slug}-${number}-write`,
-          type: "fill-gap" as const,
-          instructions: "Scrivi la forma verbale completa, senza abbreviazioni.",
-          estimatedTime: 60,
-        },
-        {
-          ...base,
-          id: `verb-${topic.slug}-${number}-correction`,
-          type: "error-correction" as const,
-          question: incorrectSentence,
-          instructions:
-            "La forma verbale nella frase non è adatta al contesto. Scrivi soltanto la forma corretta.",
-          estimatedTime: 65,
-        },
-        {
-          ...base,
-          id: `verb-${topic.slug}-${number}-context`,
-          type: "verb-tense" as const,
-          instructions: `Completa senza opzioni. Prima individua il rapporto temporale, poi applica ${topic.title}.`,
-          estimatedTime: 75,
-        },
-      ];
+      } satisfies Exercise;
     }),
 );
 

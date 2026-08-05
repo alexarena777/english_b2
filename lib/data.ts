@@ -7,6 +7,7 @@ import {
 import { b2ReadingPassages } from "./curriculum/reading";
 import { b2ListeningActivities } from "./curriculum/listening";
 import { universityGrammarExercises } from "./curriculum/university";
+import { universityExamExercises } from "./curriculum/uni-exam-data";
 
 const createdAt = "2026-07-01T00:00:00.000Z";
 type Seed = [string, string, string, string, string, string, string];
@@ -60,7 +61,14 @@ const grammarSeeds: Seed[] = [
   ["Word formation", "Her explanation was clear and very ___. (HELP)", "helpful", "helply", "helpness", "Serve un aggettivo dopo “very”; il suffisso corretto è -ful.", "Il suffisso -ful forma aggettivi con il significato di ‘pieno di/che offre’."],
   ["Word formation", "The plan is financially ___. (SUSTAIN)", "sustainable", "sustainment", "sustainably", "Dopo “is financially” serve un aggettivo.", "-able forma aggettivi che indicano possibilità o capacità."],
   ["Common B2 mistakes", "I’ve lived here ___ five years.", "for", "since", "from", "“Five years” è una durata, quindi si usa “for”.", "For + periodo; since + punto iniziale."],
-  ["Common B2 mistakes", "I’m looking forward to ___ from you.", "hearing", "hear", "have heard", "In questa espressione “to” è una preposizione, quindi è seguito dal gerundio.", "Look forward to + nome o verbo in -ing."]
+  ["Common B2 mistakes", "I’m looking forward to ___ from you.", "hearing", "hear", "have heard", "In questa espressione “to” è una preposizione, quindi è seguito dal gerundio.", "Look forward to + nome o verbo in -ing."],
+  ["Adjectives", "He's 30 years old but can be so ___ sometimes.", "childish", "child", "childy", "Il suffisso -ish indica una caratteristica o un'approssimazione.", "Il suffisso -ish si usa con i nomi per significare 'simile a'."],
+  ["Adjectives", "She bought a ___ handbag.", "lovely large Italian leather", "lovely Italian large leather", "large lovely leather Italian", "L'ordine degli aggettivi è Opinion, Size, Origin, Material.", "Ordine degli aggettivi: Opinion, Size, Age, Shape, Colour, Origin, Material."],
+  ["Agreeing and disagreeing", "I like classical music. - ___", "So do I.", "So am I.", "Neither do I.", "Per concordare con una frase affermativa al present simple si usa 'So do I'.", "Per concordare con un'affermazione si usa 'So' + ausiliare + soggetto."],
+  ["Agreeing and disagreeing", "Is the bill going to be expensive? - ___", "I hope not.", "I don't hope so.", "I don't hope not.", "In inglese si dice 'I hope not' per esprimere una speranza negativa.", "Non si usa 'I don't hope so'; la forma corretta è 'I hope not'."],
+  ["Make and let", "When I was younger, my parents ___ eat lots of vegetables.", "made me", "made me to", "let me to", "Make è seguito dall'oggetto e dall'infinito senza 'to'.", "Make someone do something; let someone do something."],
+  ["Gerund and infinitive", "I remember ___ the clarinet in the school orchestra.", "playing", "to play", "play", "Remember + gerundio si riferisce a un ricordo del passato.", "Remember + -ing per azioni passate; remember + to-infinitive per azioni future da compiere."],
+  ["Passive voice", "The missing man ___ from London.", "is thought to be", "is thought that he is", "is thought being", "Il passivo impersonale usa 'is thought to be'.", "Subject + be thought + to-infinitive."]
 ];
 
 function grammarExercise(seed: Seed, index: number): Exercise {

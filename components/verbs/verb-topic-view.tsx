@@ -1,15 +1,19 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
-import { BookOpenCheck, Clock3, Layers3, PlayCircle, BookOpen, Sparkles, ArrowDown } from "lucide-react";
+import {
+  BookOpenCheck, Layers3, PlayCircle, ArrowDown,
+  ArrowLeft, ArrowRight, AlertTriangle, CheckCircle2, Zap
+} from "lucide-react";
 import type { Exercise } from "@/lib/types";
 import type { VerbTenseTopic } from "@/lib/curriculum/verbs";
+import { verbTenseTopics } from "@/lib/curriculum/verbs";
 import { AppPage } from "@/components/app-shell";
-import { GrammarExplanation } from "@/components/exercises/grammar-explanation";
 import { ExerciseRenderer } from "@/components/exercises/exercise-renderer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 const SESSION_SIZE = 8;
 
@@ -20,19 +24,21 @@ export function VerbTopicView({
   topic: VerbTenseTopic;
   exercises: Exercise[];
 }) {
-  const [activeTab, setActiveTab] = useState<"exercises" | "explanation">("exercises");
-  const [session, setSession] = useState(0);
-
   const practiceRef = useRef<HTMLDivElement>(null);
 
+  // Prev / Next navigation
+  const allTopics = verbTenseTopics;
+  const currentIdx = allTopics.findIndex((t) => t.slug === topic.slug);
+  const prevTopic = currentIdx > 0 ? allTopics[currentIdx - 1] : null;
+  const nextTopic = currentIdx < allTopics.length - 1 ? allTopics[currentIdx + 1] : null;
+
+  // Sessions
   const sessions = Array.from(
     { length: Math.ceil(exercises.length / SESSION_SIZE) },
-    (_, index) => exercises.slice(index * SESSION_SIZE, (index + 1) * SESSION_SIZE),
+    (_, i) => exercises.slice(i * SESSION_SIZE, (i + 1) * SESSION_SIZE),
   );
-  const selected = sessions[session] ?? sessions[0] ?? [];
 
   function scrollToPractice() {
-    setActiveTab("exercises");
     setTimeout(() => {
       practiceRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 50);
@@ -40,103 +46,172 @@ export function VerbTopicView({
 
   return (
     <AppPage>
+      {/* Breadcrumb */}
       <div className="breadcrumb">
         <Link href="/grammar">Verbi e tempi</Link>
+        <span>/</span>
+        <span style={{ color: "var(--muted)", fontSize: "11px" }}>{topic.category}</span>
         <span>/</span>
         <b>{topic.title}</b>
       </div>
 
-      {/* Hero Banner with Quick Actions */}
+      {/* Hero */}
       <section className="verb-topic-hero mb-6">
         <div>
-          <div className="flex items-center gap-2 mb-2">
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
             <Badge>B2 VERB LAB</Badge>
             <Badge variant="success">{exercises.length} Esercizi</Badge>
+            <Badge>{topic.category}</Badge>
           </div>
-          <span className="text-sm font-semibold opacity-90">{topic.italianTitle}</span>
-          <h1 className="text-3xl font-bold my-1">{topic.title}</h1>
-          <p className="font-mono text-sm opacity-90 bg-black/10 dark:bg-white/10 px-3 py-1.5 rounded-lg inline-block my-2">
-            Forma: {topic.formula}
+          <span style={{ fontSize: "12px", opacity: 0.85 }}>{topic.italianTitle}</span>
+          <h1 style={{ fontFamily: "Georgia, serif", fontSize: "36px", margin: "4px 0 8px" }}>
+            {topic.title}
+          </h1>
+          <p style={{ fontFamily: "monospace", fontSize: "13px", opacity: 0.9, background: "rgba(255,255,255,0.12)", padding: "6px 12px", borderRadius: "8px", display: "inline-block", margin: "0 0 16px" }}>
+            {topic.formula}
           </p>
 
-          <div className="flex gap-3 mt-4">
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
             <Button size="lg" onClick={scrollToPractice}>
-              <PlayCircle size={20} /> Inizia Esercizi Subito <ArrowDown size={16} />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => setActiveTab(activeTab === "explanation" ? "exercises" : "explanation")}
-            >
-              <BookOpen size={18} /> {activeTab === "explanation" ? "Nascondi Teoria" : "Leggi Teoria"}
+              <PlayCircle size={20} /> Vai agli Esercizi <ArrowDown size={16} />
             </Button>
           </div>
         </div>
 
-        <dl className="mt-4 border-t border-white/20 pt-4">
+        {/* Signal words */}
+        <dl style={{ marginTop: "16px", borderTop: "1px solid rgba(255,255,255,0.2)", paddingTop: "14px" }}>
           <div>
-            <dt><Layers3 size={16} /> Quando si usa</dt>
-            <dd>{topic.useCases.join(" · ")}</dd>
-          </div>
-          <div>
-            <dt><Clock3 size={16} /> Segnali frequenti</dt>
-            <dd>{topic.signals.join(" · ")}</dd>
+            <dt><Layers3 size={16} /> Segnali temporali</dt>
+            <dd style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "6px" }}>
+              {topic.signals.map((s) => (
+                <span key={s} style={{ padding: "3px 9px", borderRadius: "8px", background: "rgba(255,255,255,0.18)", fontSize: "11px", fontWeight: 750 }}>
+                  {s}
+                </span>
+              ))}
+            </dd>
           </div>
         </dl>
       </section>
 
-      {/* Main Content Area */}
-      {activeTab === "explanation" && (
-        <div className="mb-8">
-          <GrammarExplanation
-            title={topic.italianTitle}
-            short={`Forma: ${topic.formula}. Prima identifica il rapporto temporale, poi scegli la coniugazione.`}
-            details={topic.useCases.join("; ")}
-            examples={topic.examples}
-            mistakes={topic.mistakes}
-          />
-        </div>
-      )}
+      {/* ── THEORY SECTION (always visible) ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "24px" }}>
 
-      {/* Practice Exercises Section */}
-      <div ref={practiceRef} className="topic-practice">
-        <div className="section-heading verb-session-heading flex items-center justify-between mb-4">
+        {/* When to use */}
+        <Card style={{ padding: "20px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+            <CheckCircle2 size={18} color="var(--green)" />
+            <b style={{ fontSize: "13px" }}>Quando si usa</b>
+          </div>
+          <ul style={{ margin: 0, paddingLeft: "18px", display: "grid", gap: "8px" }}>
+            {topic.useCases.map((uc) => (
+              <li key={uc} style={{ fontSize: "12px", lineHeight: 1.55, color: "var(--ink)" }}>
+                {uc}
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        {/* Common mistakes */}
+        <Card style={{ padding: "20px", background: "color-mix(in srgb, var(--amber-soft) 60%, var(--card))", border: "1px solid color-mix(in srgb, var(--amber) 25%, var(--line))" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+            <AlertTriangle size={18} color="var(--amber)" />
+            <b style={{ fontSize: "13px" }}>Errori comuni</b>
+          </div>
+          <ul style={{ margin: 0, paddingLeft: "18px", display: "grid", gap: "8px" }}>
+            {topic.mistakes.map((m) => (
+              <li key={m} style={{ fontSize: "12px", lineHeight: 1.55, color: "var(--ink)" }}>
+                {m}
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </div>
+
+      {/* Examples with Italian translation */}
+      <Card style={{ padding: "20px", marginBottom: "24px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+          <Zap size={18} color="var(--green)" />
+          <b style={{ fontSize: "13px" }}>Esempi con traduzione</b>
+        </div>
+        <div style={{ display: "grid", gap: "12px" }}>
+          {topic.examples.map((en, i) => (
+            <div key={en} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", alignItems: "center", padding: "10px 14px", borderRadius: "10px", background: "var(--card-2)" }}>
+              <div>
+                <span style={{ fontSize: "8px", fontWeight: 850, letterSpacing: "0.1em", color: "var(--green)", display: "block", marginBottom: "3px" }}>INGLESE</span>
+                <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "13px", lineHeight: 1.5 }}>{en}</p>
+              </div>
+              <div style={{ borderLeft: "2px solid var(--line)", paddingLeft: "12px" }}>
+                <span style={{ fontSize: "8px", fontWeight: 850, letterSpacing: "0.1em", color: "var(--muted)", display: "block", marginBottom: "3px" }}>ITALIANO</span>
+                <p style={{ margin: 0, color: "var(--muted)", fontSize: "12px", lineHeight: 1.5 }}>
+                  {topic.examplesIT?.[i] ?? "—"}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      {/* ── EXERCISES ── */}
+      <div ref={practiceRef}>
+        <div className="section-heading verb-session-heading" style={{ marginBottom: "16px" }}>
           <div>
             <span className="page-eyebrow">ESERCIZI PRATICI B2</span>
-            <h2 className="text-2xl font-bold">Sessioni di Allenamento</h2>
-            <p className="text-sm text-muted">
-              {exercises.length} domande divisi in sessioni rapide da {SESSION_SIZE} esercizi.
+            <h2 style={{ fontSize: "22px", fontWeight: 700 }}>Sessioni di Allenamento</h2>
+            <p style={{ fontSize: "11px", color: "var(--muted)" }}>
+              {exercises.length} domande in sessioni da {SESSION_SIZE} · frasi tutte diverse
             </p>
           </div>
-          <Button asChild variant="outline" size="sm">
-            <Link href="/grammar">Tutti i Verbi</Link>
-          </Button>
         </div>
 
-        {/* Session Selector Pills */}
-        <div className="verb-session-picker mb-6 flex flex-wrap gap-2" aria-label="Scegli una sessione">
+        {/* Session pills */}
+        <div className="verb-session-picker mb-6" style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
           {sessions.map((items, index) => (
-            <button
-              key={index}
-              type="button"
-              className={`btn btn-md ${session === index ? "btn-primary" : "btn-outline"}`}
-              onClick={() => setSession(index)}
-            >
-              <BookOpenCheck size={18} />
-              <span>Sessione {index + 1}</span>
-              <small className="ml-1 opacity-80">({items.length} domande)</small>
-            </button>
+            <Link key={index} href={`/grammar/${topic.slug}?s=${index}`}>
+              <button type="button" className={`btn btn-md btn-outline`}>
+                <BookOpenCheck size={16} />
+                <span>Sessione {index + 1}</span>
+                <small>({items.length} domande)</small>
+              </button>
+            </Link>
           ))}
         </div>
 
-        {/* Exercise Renderer */}
         <ExerciseRenderer
-          key={`${topic.slug}-${session}`}
-          exercises={selected}
+          key={topic.slug}
+          exercises={sessions[0] ?? []}
           compact
           enableModeSwitch
         />
       </div>
+
+      {/* Prev / Next navigation */}
+      <div style={{ display: "flex", justifyContent: "space-between", gap: "12px", marginTop: "40px", paddingTop: "24px", borderTop: "1px solid var(--line)" }}>
+        {prevTopic ? (
+          <Link href={`/grammar/${prevTopic.slug}`} style={{ flex: 1 }}>
+            <Card style={{ display: "flex", alignItems: "center", gap: "10px", padding: "14px 16px", cursor: "pointer" }}>
+              <ArrowLeft size={18} color="var(--muted)" />
+              <div>
+                <span style={{ fontSize: "9px", color: "var(--muted)", fontWeight: 850, display: "block" }}>PRECEDENTE</span>
+                <b style={{ fontSize: "12px" }}>{prevTopic.title}</b>
+              </div>
+            </Card>
+          </Link>
+        ) : <div style={{ flex: 1 }} />}
+
+        {nextTopic ? (
+          <Link href={`/grammar/${nextTopic.slug}`} style={{ flex: 1 }}>
+            <Card style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "10px", padding: "14px 16px", cursor: "pointer" }}>
+              <div style={{ textAlign: "right" }}>
+                <span style={{ fontSize: "9px", color: "var(--muted)", fontWeight: 850, display: "block" }}>SUCCESSIVO</span>
+                <b style={{ fontSize: "12px" }}>{nextTopic.title}</b>
+              </div>
+              <ArrowRight size={18} color="var(--muted)" />
+            </Card>
+          </Link>
+        ) : <div style={{ flex: 1 }} />}
+      </div>
     </AppPage>
   );
 }
+
+

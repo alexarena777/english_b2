@@ -15,3 +15,5 @@ export const viewport: Viewport = { themeColor: [{ media: "(prefers-color-scheme
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="it" suppressHydrationWarning><body><AppProviders>{children}</AppProviders></body></html>;
 }
+
+/* Trigger new Vercel build */

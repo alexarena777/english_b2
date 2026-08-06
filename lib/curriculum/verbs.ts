@@ -1,13 +1,18 @@
 import type { Exercise } from "../types";
+import {
+  type VerbSeed,
+  presentSimpleSeeds,
+  presentContinuousSeeds,
+  presentPerfectSimpleSeeds,
+  pastSimpleSeeds,
+  pastContinuousSeeds,
+  pastPerfectSimpleSeeds,
+  willFutureSeeds,
+  beGoingToSeeds,
+  conditionalsSeeds,
+} from "./verb-seeds";
 
 const createdAt = "2026-08-02T00:00:00.000Z";
-
-type VerbSeed = {
-  sentence: string;
-  answer: string;
-  distractors: [string, string];
-  note: string;
-};
 
 export type VerbCategory = "Presenti" | "Passati" | "Futuri" | "Forme speciali";
 
@@ -40,16 +45,7 @@ const definitions: VerbTopicDefinition[] = [
     examplesIT: ["Di solito lavoro da casa.", "Il treno parte alle 7:15."],
     mistakes: ["Dimenticare la -s alla terza persona.", "Usarlo per un'azione temporanea in corso."],
     youtubeId: "L9AWrJuqaQA",
-    seeds: [
-      { sentence: "I usually ___ from home, but today I am at the office.", answer: "work", distractors: ["am working", "worked"], note: "Usually segnala un'abitudine." },
-      { sentence: "My sister ___ two languages fluently.", answer: "speaks", distractors: ["is speaking", "speak"], note: "Una capacità stabile richiede il present simple." },
-      { sentence: "The museum ___ at ten on Sundays.", answer: "opens", distractors: ["is opening", "open"], note: "Gli orari ufficiali usano il present simple." },
-      { sentence: "Water ___ at 100°C at sea level.", answer: "boils", distractors: ["is boiling", "boil"], note: "È una verità generale." },
-      { sentence: "How often ___ your team meet?", answer: "does", distractors: ["is", "do"], note: "Con un soggetto singolare la domanda usa does." },
-      { sentence: "Lena rarely ___ late for meetings.", answer: "arrives", distractors: ["arrive", "is arriving"], note: "Rarely indica frequenza; Lena richiede la -s." },
-      { sentence: "This guide ___ everything you need to know.", answer: "contains", distractors: ["is containing", "contain"], note: "Contain descrive uno stato stabile." },
-      { sentence: "We ___ online orders after 6 p.m.", answer: "do not process", distractors: ["are not processing", "does not process"], note: "È una regola abituale espressa al negativo." },
-    ],
+    seeds: presentSimpleSeeds,
   },
   {
     slug: "present-continuous",
@@ -63,16 +59,7 @@ const definitions: VerbTopicDefinition[] = [
     examplesIT: ["Sta parlando con un cliente adesso.", "Sempre più persone lavorano da remoto."],
     mistakes: ["Dimenticare il verbo be.", "Usarlo normalmente con verbi di stato come know o believe."],
     youtubeId: "L9AWrJuqaQA",
-    seeds: [
-      { sentence: "Please be quiet; I ___ to an important client.", answer: "am talking", distractors: ["talk", "have talked"], note: "L'azione è in corso nel momento in cui si parla." },
-      { sentence: "We ___ with friends while our flat is being painted.", answer: "are staying", distractors: ["stay", "have stayed"], note: "È una sistemazione temporanea." },
-      { sentence: "The cost of energy ___ rapidly this year.", answer: "is rising", distractors: ["rises", "has rose"], note: "Descrive una tendenza attuale in cambiamento." },
-      { sentence: "Why ___ you wearing a coat indoors?", answer: "are", distractors: ["do", "have"], note: "La domanda riguarda ciò che sta accadendo ora." },
-      { sentence: "I ___ on a new project this month.", answer: "am working", distractors: ["work", "have worked"], note: "This month presenta una situazione temporanea." },
-      { sentence: "They ___ always ___ their keys!", answer: "are / losing", distractors: ["do / lose", "have / lost"], note: "Always con il continuous può esprimere irritazione." },
-      { sentence: "The company ___ its customer service at present.", answer: "is improving", distractors: ["improves", "improved"], note: "At present indica un processo in corso." },
-      { sentence: "I ___ what you mean now.", answer: "understand", distractors: ["am understanding", "have understanding"], note: "Understand è normalmente un verbo di stato, quindi non usa il continuous." },
-    ],
+    seeds: presentContinuousSeeds,
   },
   {
     slug: "present-perfect-simple",
@@ -86,16 +73,7 @@ const definitions: VerbTopicDefinition[] = [
     examplesIT: ["Ho visitato Dublino due volte.", "Ha finito il rapporto."],
     mistakes: ["Usarlo con yesterday o last year.", "Confondere since, che introduce l'inizio, con for, che indica la durata."],
     youtubeId: "L9AWrJuqaQA",
-    seeds: [
-      { sentence: "She ___ three reports so far today.", answer: "has written", distractors: ["wrote", "writes"], note: "So far today indica un periodo ancora aperto." },
-      { sentence: "I ___ that film, so please do not tell me the ending.", answer: "have not seen", distractors: ["did not see", "do not see"], note: "L'esperienza manca fino al presente." },
-      { sentence: "___ you ever tried rock climbing?", answer: "Have", distractors: ["Did", "Do"], note: "Ever introduce un'esperienza nella vita." },
-      { sentence: "We ___ each other since primary school.", answer: "have known", distractors: ["know", "are knowing"], note: "La situazione è iniziata nel passato e continua ora." },
-      { sentence: "The parcel ___ yet.", answer: "has not arrived", distractors: ["did not arrive", "is not arriving"], note: "Yet al negativo richiama il present perfect." },
-      { sentence: "Researchers ___ a promising solution.", answer: "have discovered", distractors: ["discovered yesterday", "are discover"], note: "Il risultato della scoperta è rilevante ora." },
-      { sentence: "This is the best meal I ___ in months.", answer: "have had", distractors: ["had", "am having"], note: "Dopo un superlativo si usa spesso il present perfect." },
-      { sentence: "He ___ in Rome for five years.", answer: "has lived", distractors: ["lives since", "is living since"], note: "For introduce la durata fino al presente." },
-    ],
+    seeds: presentPerfectSimpleSeeds,
   },
   {
     slug: "present-perfect-continuous",
@@ -132,16 +110,7 @@ const definitions: VerbTopicDefinition[] = [
     examplesIT: ["Ci siamo trasferiti qui l'anno scorso.", "L'hai chiamata?"],
     mistakes: ["Usare il participio dopo did.", "Usarlo per una situazione che continua ancora adesso."],
     youtubeId: "L9AWrJuqaQA",
-    seeds: [
-      { sentence: "We ___ the museum before it closed for renovation.", answer: "visited", distractors: ["have visited", "were visiting"], note: "L'evento è concluso in un periodo passato finito." },
-      { sentence: "I ___ your message yesterday evening.", answer: "received", distractors: ["have received", "receive"], note: "Yesterday richiede il past simple." },
-      { sentence: "Where ___ you buy that jacket?", answer: "did", distractors: ["have", "were"], note: "La domanda al past simple usa did." },
-      { sentence: "She ___ not attend the conference last week.", answer: "did", distractors: ["was", "has"], note: "La negazione usa did not + verbo base." },
-      { sentence: "The lights went out, so we ___ some candles.", answer: "lit", distractors: ["have lit", "were lighting"], note: "È una sequenza di eventi conclusi." },
-      { sentence: "He ___ in Madrid from 2018 to 2021.", answer: "lived", distractors: ["has lived", "lives"], note: "L'intervallo è completamente concluso." },
-      { sentence: "The meeting ___ longer than anyone expected.", answer: "lasted", distractors: ["has lasted", "was lasting"], note: "La riunione è un evento passato terminato." },
-      { sentence: "I ___ her at a workshop two years ago.", answer: "met", distractors: ["have met", "meet"], note: "Ago segnala un momento passato finito." },
-    ],
+    seeds: pastSimpleSeeds,
   },
   {
     slug: "past-continuous",
@@ -155,16 +124,7 @@ const definitions: VerbTopicDefinition[] = [
     examplesIT: ["Stavo cucinando quando hai chiamato.", "Mentre lei leggeva, lui lavorava."],
     mistakes: ["Usarlo per l'evento breve che interrompe.", "Dimenticare la concordanza was/were."],
     youtubeId: "L9AWrJuqaQA",
-    seeds: [
-      { sentence: "While I ___ dinner, the lights went out.", answer: "was making", distractors: ["made", "have made"], note: "L'azione lunga fa da sfondo all'evento breve." },
-      { sentence: "At nine last night, we ___ home.", answer: "were driving", distractors: ["drove", "have driven"], note: "L'azione era in corso a un momento preciso del passato." },
-      { sentence: "What ___ you doing when the alarm rang?", answer: "were", distractors: ["did", "have"], note: "La domanda chiede l'azione in corso al momento dell'interruzione." },
-      { sentence: "As the speaker ___, someone opened the door.", answer: "was presenting", distractors: ["presented", "has presented"], note: "As introduce l'azione di sfondo." },
-      { sentence: "They ___ attention while the guide was explaining the rules.", answer: "were not paying", distractors: ["did not pay", "have not paid"], note: "Due azioni si svolgevano nello stesso intervallo." },
-      { sentence: "It ___ heavily, so the roads were slippery.", answer: "was raining", distractors: ["rained once", "has rained"], note: "Descrive la situazione di sfondo." },
-      { sentence: "I saw Maya while she ___ for the bus.", answer: "was waiting", distractors: ["waited", "has waited"], note: "L'attesa era già in corso quando l'ho vista." },
-      { sentence: "While one group ___ the data, the other was writing the report.", answer: "was analysing", distractors: ["analysed", "has analysed"], note: "Le due attività erano contemporanee." },
-    ],
+    seeds: pastContinuousSeeds,
   },
   {
     slug: "past-perfect-simple",
@@ -178,16 +138,7 @@ const definitions: VerbTopicDefinition[] = [
     examplesIT: ["Il film era già iniziato prima che arrivassimo.", "Non aveva mai volato prima."],
     mistakes: ["Usarlo quando l'ordine degli eventi è già evidente e non serve enfasi.", "Usare had + past simple invece del participio."],
     youtubeId: "L9AWrJuqaQA",
-    seeds: [
-      { sentence: "By the time we arrived, the film ___.", answer: "had already started", distractors: ["already started", "has already started"], note: "L'inizio precede il nostro arrivo, entrambi nel passato." },
-      { sentence: "She was nervous because she ___ abroad before.", answer: "had never travelled", distractors: ["never travelled", "has never travelled"], note: "L'assenza di esperienza precede il momento in cui era nervosa." },
-      { sentence: "After the team ___ the data, it published the report.", answer: "had checked", distractors: ["has checked", "was checking"], note: "Il controllo è completato prima della pubblicazione." },
-      { sentence: "I recognised the café because I ___ there once before.", answer: "had been", distractors: ["was", "have been"], note: "La visita precedente spiega il riconoscimento passato." },
-      { sentence: "The room was empty; everyone ___ home.", answer: "had gone", distractors: ["went just", "has gone"], note: "La partenza è precedente alla scoperta della stanza vuota." },
-      { sentence: "He apologised for what he ___.", answer: "had said", distractors: ["has said", "was saying"], note: "Le parole vengono prima delle scuse." },
-      { sentence: "They missed the train because they ___ the departure time.", answer: "had misunderstood", distractors: ["misunderstood later", "have misunderstood"], note: "L'errore precedente causa il risultato passato." },
-      { sentence: "Until that day, I ___ such a difficult decision.", answer: "had never faced", distractors: ["never faced", "have never faced"], note: "Until that day crea un limite nel passato." },
-    ],
+    seeds: pastPerfectSimpleSeeds,
   },
   {
     slug: "past-perfect-continuous",
@@ -224,16 +175,7 @@ const definitions: VerbTopicDefinition[] = [
     examplesIT: ["Rispondo io al telefono.", "Penso che i prezzi aumenteranno."],
     mistakes: ["Usarlo per un piano già deciso.", "Aggiungere to dopo will."],
     youtubeId: "L9AWrJuqaQA",
-    seeds: [
-      { sentence: "The phone is ringing. I ___ it.", answer: "will answer", distractors: ["am answering yesterday", "answer usually"], note: "La decisione viene presa mentre si parla." },
-      { sentence: "I think the new system ___ time.", answer: "will save", distractors: ["is saving last week", "has saved tomorrow"], note: "I think introduce una previsione personale." },
-      { sentence: "Do not worry; I ___ anyone your secret.", answer: "will not tell", distractors: ["am not telling yesterday", "do not told"], note: "È una promessa spontanea." },
-      { sentence: "___ you help me carry this box?", answer: "Will", distractors: ["Do going to", "Are"], note: "Will può formulare una richiesta." },
-      { sentence: "Perhaps people ___ less cash in the future.", answer: "will use", distractors: ["are use", "have used"], note: "Perhaps segnala una previsione incerta." },
-      { sentence: "I am sure you ___ the course useful.", answer: "will find", distractors: ["are finding yesterday", "found tomorrow"], note: "È una previsione/opinione sul futuro." },
-      { sentence: "We ___ you as soon as we have more information.", answer: "will contact", distractors: ["contact will", "will to contact"], note: "La principale futura usa will; dopo as soon as si usa il presente." },
-      { sentence: "If you wait here, the manager ___ with you shortly.", answer: "will speak", distractors: ["speaks yesterday", "would spoke"], note: "È il risultato futuro di una condizione reale." },
-    ],
+    seeds: willFutureSeeds,
   },
   {
     slug: "be-going-to",
@@ -247,16 +189,7 @@ const definitions: VerbTopicDefinition[] = [
     examplesIT: ["Ho intenzione di candidarmi per il lavoro.", "Guarda! Sta per piovere."],
     mistakes: ["Dimenticare il verbo be.", "Usarlo per una decisione davvero spontanea."],
     youtubeId: "L9AWrJuqaQA",
-    seeds: [
-      { sentence: "Look at those clouds! It ___.", answer: "is going to rain", distractors: ["rains yesterday", "has raining"], note: "La previsione è basata su un'evidenza visibile." },
-      { sentence: "I ___ a digital marketing course next month.", answer: "am going to start", distractors: ["will started", "going start"], note: "L'intenzione è già stata decisa." },
-      { sentence: "They ___ their kitchen this summer.", answer: "are going to renovate", distractors: ["will renovating", "going renovate"], note: "È un piano futuro già esistente." },
-      { sentence: "Be careful! You ___ that glass.", answer: "are going to drop", distractors: ["drop usually", "have dropped tomorrow"], note: "La situazione presente rende il risultato imminente." },
-      { sentence: "What ___ you going to do after the course?", answer: "are", distractors: ["do", "will to"], note: "La domanda con going to richiede il verbo be." },
-      { sentence: "She ___ not going to accept the offer.", answer: "is", distractors: ["does", "has"], note: "La forma negativa è be + not + going to." },
-      { sentence: "We have saved enough money, so we ___ a new laptop.", answer: "are going to buy", distractors: ["buy yesterday", "have buy"], note: "La preparazione dimostra un'intenzione già formata." },
-      { sentence: "The shelf is shaking; the books ___.", answer: "are going to fall", distractors: ["fall every day", "have fell"], note: "L'evidenza presente sostiene la previsione." },
-    ],
+    seeds: beGoingToSeeds,
   },
   {
     slug: "present-continuous-future",
@@ -385,16 +318,7 @@ const definitions: VerbTopicDefinition[] = [
     examplesIT: ["Se scaldi il ghiaccio, si scioglie.", "Se l'avessi saputo, avrei chiamato."],
     mistakes: ["Usare will nella if-clause standard.", "Confondere il secondo e il terzo condizionale."],
     youtubeId: "L9AWrJuqaQA",
-    seeds: [
-      { sentence: "If you heat ice, it ___.", answer: "melts", distractors: ["will melt", "would melt"], note: "Lo zero conditional descrive una verità generale." },
-      { sentence: "If the weather improves, we ___ for a walk.", answer: "will go", distractors: ["would go", "went"], note: "È una possibilità reale futura: first conditional." },
-      { sentence: "If I ___ more confident, I would apply for that job.", answer: "were", distractors: ["am", "will be"], note: "È un'ipotesi irreale nel presente: second conditional." },
-      { sentence: "If they had left earlier, they ___ the train.", answer: "would have caught", distractors: ["would catch", "caught"], note: "Si immagina un risultato passato diverso: third conditional." },
-      { sentence: "If I had accepted the offer, I ___ in Berlin now.", answer: "would be living", distractors: ["would have lived", "will live"], note: "Causa passata e risultato presente formano un mixed conditional." },
-      { sentence: "Unless you ___ now, you will miss the bus.", answer: "leave", distractors: ["will leave", "would leave"], note: "Unless equivale a if not e regge il present simple." },
-      { sentence: "Provided that everyone agrees, we ___ the plan tomorrow.", answer: "will approve", distractors: ["approved", "would have approved"], note: "La condizione è reale e riguarda il futuro." },
-      { sentence: "If she ___ the warning, she would not be in trouble now.", answer: "had followed", distractors: ["followed", "would follow"], note: "Una causa passata non realizzata produce un risultato presente." },
-    ],
+    seeds: conditionalsSeeds,
   },
 ];
 

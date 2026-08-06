@@ -19,21 +19,21 @@ const SESSION_SIZE = 8;
 
 // Mappa slug → ID YouTube (JoEnglish)
 const YOUTUBE_IDS: Record<string, string> = {
-  "present-simple":             "Cmzc88Umoz4", // SCOMMETTO che fai questo ERRORE con IL PRESENT SIMPLE!
-  "present-continuous":         "i1Wfrnyld-8", // I TEMPI INGLESI - Part 1 - PRESENT
-  "present-perfect-simple":     "fCeetsOARcg", // Past Simple V Present Perfect
-  "present-perfect-continuous": "fCeetsOARcg", 
-  "past-simple":                "fCeetsOARcg",
-  "past-continuous":            "fCeetsOARcg",
-  "past-perfect-simple":        "fCeetsOARcg",
-  "past-perfect-continuous":    "fCeetsOARcg",
-  "will-future":                "fT_xihRXrkc", // Il FUTURO in inglese spiegato BENE
-  "be-going-to":                "fT_xihRXrkc",
-  "present-continuous-future":  "fT_xihRXrkc",
-  "future-continuous":          "fT_xihRXrkc",
-  "future-perfect-simple":      "fT_xihRXrkc",
-  "future-perfect-continuous":  "fT_xihRXrkc",
-  "used-to-would":              "fCeetsOARcg",
+  "present-simple":             "i1Wfrnyld-8", // I TEMPI INGLESI - Part 1 - PRESENT
+  "present-continuous":         "i1Wfrnyld-8", 
+  "present-perfect-simple":     "7UByCdDk4X8", // I TEMPI INGLESI - Part 2 - PAST
+  "present-perfect-continuous": "7UByCdDk4X8", 
+  "past-simple":                "7UByCdDk4X8",
+  "past-continuous":            "7UByCdDk4X8",
+  "past-perfect-simple":        "7UByCdDk4X8",
+  "past-perfect-continuous":    "7UByCdDk4X8",
+  "will-future":                "Jc-9efRvssg", // I TEMPI INGLESI - Part 3 - FUTURE
+  "be-going-to":                "Jc-9efRvssg",
+  "present-continuous-future":  "Jc-9efRvssg",
+  "future-continuous":          "Jc-9efRvssg",
+  "future-perfect-simple":      "Jc-9efRvssg",
+  "future-perfect-continuous":  "Jc-9efRvssg",
+  "used-to-would":              "7UByCdDk4X8",
   "conditionals":               "fXxVfeR8nZU", // I CONDIZIONALI in Inglese
 };
 

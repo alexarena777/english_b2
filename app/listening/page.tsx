@@ -58,20 +58,20 @@ export default function ListeningPage() {
       .filter((part) => part.text);
   }
 
-  function playFallbackSpeech() {
+  function playFallbackSpeech(fromIndex = 0) {
     if (!("speechSynthesis" in window)) {
       setAudioMessage("Audio non disponibile in modalità offline.");
       setPlayback("idle");
       return;
     }
 
-    const segments = transcriptSegments(activity.transcript);
-    segments.forEach((segment, segmentIndex) => {
+    const segments = transcriptSegments(activity.transcript).slice(fromIndex);
+    segments.forEach((segment, i) => {
       if (isCancelledRef.current) return;
       const utterance = new SpeechSynthesisUtterance(segment.text);
       utterance.lang = "en-GB";
       utterance.rate = playbackRate;
-      if (segmentIndex === segments.length - 1) {
+      if (i === segments.length - 1) {
         utterance.onend = () => setPlayback("idle");
       }
       window.speechSynthesis.speak(utterance);
@@ -96,18 +96,22 @@ export default function ListeningPage() {
       const audio = new Audio(audioUrl);
       audio.playbackRate = playbackRate;
 
+      let fallbackTriggered = false;
+      const triggerFallback = () => {
+        if (fallbackTriggered || isCancelledRef.current) return;
+        fallbackTriggered = true;
+        playFallbackSpeech(index);
+      };
+
       audio.onended = () => {
-        if (!isCancelledRef.current) {
+        if (!isCancelledRef.current && !fallbackTriggered) {
           playNextSegment(index + 1);
         }
       };
 
-      audio.onerror = () => {
-        playFallbackSpeech();
-      };
-
+      audio.onerror = triggerFallback;
       currentAudioRef.current = audio;
-      audio.play().catch(() => playFallbackSpeech());
+      audio.play().catch(triggerFallback);
     }
 
     playNextSegment(0);
@@ -117,6 +121,10 @@ export default function ListeningPage() {
     if (playback === "paused") {
       if (currentAudioRef.current) {
         currentAudioRef.current.play();
+        setPlayback("playing");
+        return;
+      } else if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.resume();
         setPlayback("playing");
         return;
       }
@@ -142,6 +150,9 @@ export default function ListeningPage() {
   function pause() {
     if (currentAudioRef.current) {
       currentAudioRef.current.pause();
+    }
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.pause();
     }
     setPlayback("paused");
   }

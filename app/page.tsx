@@ -6,6 +6,7 @@ import {
   Check,
   Headphones,
   Languages,
+  PenTool,
   Sparkles,
 } from "lucide-react";
 import { Brand } from "@/components/brand";
@@ -59,6 +60,14 @@ const sections = [
     icon: Headphones,
     tone: "lilac",
   },
+  {
+    number: "06",
+    title: "Writing",
+    detail: `Bozze e valutazione AI su temi ed essay B2`,
+    href: "/writing",
+    icon: PenTool,
+    tone: "amber",
+  },
 ];
 
 export default function Home() {
@@ -88,8 +97,8 @@ export default function Home() {
             <span>una competenza alla volta.</span>
           </h1>
           <p>
-            Un percorso concentrato su cinque aree: il lessico che serve davvero,
-            tutti i tempi verbali, Use of English Cambridge, reading completi e listening in stile esame.
+            Un percorso concentrato su sei aree: il lessico che serve davvero,
+            tutti i tempi verbali, Use of English Cambridge, reading, listening e writing in stile esame.
           </p>
           <div className="hero-actions">
             <Button asChild size="lg">
@@ -108,10 +117,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="four-path-preview" aria-label="Le cinque sezioni del percorso">
+        <div className="four-path-preview" aria-label="Le sei sezioni del percorso">
           <header>
             <span>IL PERCORSO COMPLETO</span>
-            <b>5 sezioni</b>
+            <b>6 sezioni</b>
           </header>
           {sections.map((section) => {
             const Icon = section.icon;
@@ -133,16 +142,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="landing-pillars" aria-label="Contenuti del percorso">
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 py-10" aria-label="Contenuti del percorso">
         {sections.map((section) => {
           const Icon = section.icon;
           return (
-            <Link href={section.href} key={section.href}>
-              <Icon />
-              <span>{section.number}</span>
-              <h2>{section.title}</h2>
-              <p>{section.detail}</p>
-              <b>Apri la sezione <ArrowRight size={15} /></b>
+            <Link href={section.href} key={section.href} className="relative flex flex-col justify-between min-h-[190px] p-5 border border-[var(--line)] rounded-[20px] bg-[var(--card)] transition-all hover:-translate-y-1 hover:border-[var(--green)] hover:shadow-lg">
+              <Icon className="text-[var(--green)]" size={28} />
+              <span className="absolute right-4 top-4 text-[var(--muted)] text-[10px] font-extrabold">{section.number}</span>
+              <div>
+                <h2 className="font-serif text-[18px] mb-2 leading-tight">{section.title}</h2>
+                <p className="text-[var(--muted)] text-[11px] leading-snug">{section.detail}</p>
+              </div>
             </Link>
           );
         })}

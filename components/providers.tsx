@@ -328,7 +328,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
           correct: current.correct + (correct ? 1 : 0),
           studyMinutes:
             current.studyMinutes + Math.max(1, Math.round(timeSpent / 60)),
-          answers: [...current.answers, userAnswer].slice(-2000),
+          answers: [...current.answers, userAnswer].slice(-5000),
           reviews,
         };
       }),
@@ -539,7 +539,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
             (attempt.durationSeconds > 0
               ? Math.max(1, Math.round(attempt.durationSeconds / 60))
               : 0),
-          answers: [...current.answers, ...recordedAnswers].slice(-2000),
+          answers: [...current.answers, ...recordedAnswers].slice(-5000),
           reviews,
           examAttempts: [...current.examAttempts, attempt].slice(-20),
         };

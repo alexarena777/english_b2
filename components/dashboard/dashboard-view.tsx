@@ -8,8 +8,10 @@ import {
   BrainCircuit,
   CheckCircle2,
   ClipboardCheck,
+  FileCheck2,
   Headphones,
   Languages,
+  PenTool,
   RefreshCcw,
   Target,
 } from "lucide-react";
@@ -152,13 +154,37 @@ export function DashboardView() {
       icon: Headphones,
       tone: "lilac",
     },
+    {
+      href: "/use-of-english",
+      label: "05 · USE OF ENGLISH",
+      title: "Costruisci precisione grammaticale",
+      description:
+        "Trasforma le parole e completa i testi con open cloze, word formation e key word transformations.",
+      facts: "Pratica intensiva per l'esame",
+      attempted: uniqueAttempted(state.answers, "use-of-english"),
+      total: 100, // Placeholder until fully populated
+      icon: FileCheck2,
+      tone: "amber",
+    },
+    {
+      href: "/writing",
+      label: "06 · WRITING",
+      title: "Padroneggia la scrittura B2",
+      description:
+        "Tracce in stile esame (essay, article, email) con simulazione e correzione assistita.",
+      facts: `${state.writingSubmissions.length} testi valutati`,
+      attempted: state.writingSubmissions.length,
+      total: 15,
+      icon: PenTool,
+      tone: "mint",
+    },
   ];
 
   return (
     <>
       <DailyGoalsWidget quotas={state.dailyQuotas} />
       
-      <div className="four-section-grid mb-6" aria-busy={!hydrated}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6" aria-busy={!hydrated}>
         {sections.map((section) => {
           const progress = section.total
             ? Math.min(100, Math.round((section.attempted / section.total) * 100))

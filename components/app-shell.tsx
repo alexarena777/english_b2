@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, BookType, BrainCircuit, ChevronRight, ClipboardCheck, Flame, Headphones, House, Languages, Moon, RefreshCcw, Settings, Sun } from "lucide-react";
+import { BarChart3, BookType, BrainCircuit, ChevronRight, ClipboardCheck, FileCheck2, Flame, Headphones, House, Languages, Moon, PenTool, RefreshCcw, Settings, Sun } from "lucide-react";
 import { Brand } from "./brand";
 import { cn } from "@/lib/utils";
 import { useEffect, useMemo, useState } from "react";
@@ -15,6 +15,8 @@ const studyNav = [
   { href: "/grammar", label: "Verbi e tempi", icon: BookType },
   { href: "/reading", label: "Reading", icon: BrainCircuit },
   { href: "/listening", label: "Listening", icon: Headphones },
+  { href: "/use-of-english", label: "Use of English", icon: FileCheck2 },
+  { href: "/writing", label: "Writing", icon: PenTool },
 ];
 const progressNav = [
   { href: "/assessment", label: "Test iniziale", icon: ClipboardCheck },

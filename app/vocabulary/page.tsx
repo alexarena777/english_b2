@@ -277,35 +277,57 @@ export default function VocabularyPage() {
               const progress = progressMap.get(item.id);
               const itemStatus = progress?.status ?? "new";
               return (
-                <Card className="vocab-card" key={item.id}>
-                  <div><Badge variant="neutral">{item.category}</Badge><Badge>{item.difficulty}</Badge></div>
-                  <h2>{item.term}</h2>
-                  <strong>{item.translation}</strong>
-                  <p>{item.definition}</p>
-                  <blockquote>{item.example}</blockquote>
-                  <footer>
-                    <span>Sinonimo: <b>{item.synonym}</b></span>
-                    <span className={itemStatus}>{itemStatus === "mastered" ? "Consolidata" : itemStatus === "learning" ? `${progress?.mastery ?? 0}% padronanza` : "Nuova"}</span>
-                  </footer>
-                  <div className="vocab-card-actions">
-                    <Button
-                      size="sm"
-                      variant={itemStatus === "learning" ? "secondary" : "ghost"}
-                      disabled={!hydrated}
-                      onClick={() => setVocabularyStatus(item.id, itemStatus === "learning" ? "new" : "learning")}
-                    >
-                      <Sparkles size={14} /> {itemStatus === "learning" ? "In studio" : "Da studiare"}
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant={itemStatus === "mastered" ? "secondary" : "ghost"}
-                      disabled={!hydrated}
-                      onClick={() => setVocabularyStatus(item.id, itemStatus === "mastered" ? "new" : "mastered")}
-                    >
-                      <Check size={14} /> {itemStatus === "mastered" ? "Consolidata" : "La conosco"}
-                    </Button>
+                <div 
+                  key={item.id}
+                  className={`group relative flex flex-col p-6 rounded-[24px] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl bg-gradient-to-br from-[var(--card)] to-[var(--card-2)] border ${itemStatus === 'mastered' ? 'border-[var(--green)] shadow-[var(--green)]/10' : itemStatus === 'learning' ? 'border-[var(--amber)] shadow-[var(--amber)]/10' : 'border-[var(--line)] shadow-black/5'}`}
+                >
+                  <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex gap-2">
+                      <Badge variant="neutral" className="bg-black/5 dark:bg-white/5 border-0 backdrop-blur-sm font-semibold">{item.category}</Badge>
+                      <Badge className="bg-black/5 dark:bg-white/5 border-0 text-[var(--muted)] font-medium">{item.difficulty}</Badge>
+                    </div>
+                    {itemStatus === 'mastered' && <div className="bg-[var(--green)] text-white w-7 h-7 rounded-full flex items-center justify-center shadow-lg shadow-[var(--green)]/30"><Check size={14} strokeWidth={3} /></div>}
+                    {itemStatus === 'learning' && <div className="bg-[var(--amber)] text-white w-7 h-7 rounded-full flex items-center justify-center shadow-lg shadow-[var(--amber)]/30"><Sparkles size={14} strokeWidth={2} /></div>}
                   </div>
-                </Card>
+                  
+                  <h2 className="text-3xl font-serif font-medium text-[var(--ink)] mb-1 group-hover:text-[var(--green)] transition-colors">{item.term}</h2>
+                  <strong className="text-[var(--green)] text-sm font-bold uppercase tracking-wider mb-3">{item.translation}</strong>
+                  
+                  <p className="text-[var(--muted)] text-[13px] leading-relaxed mb-4">{item.definition}</p>
+                  
+                  <blockquote className="relative p-3.5 rounded-xl bg-black/5 dark:bg-white/5 border-l-4 border-[var(--green)] text-[13px] italic text-[var(--muted)] mb-5">
+                    "{item.example}"
+                  </blockquote>
+                  
+                  <div className="mt-auto pt-4 border-t border-[var(--line)] flex items-center justify-between">
+                    <span className="text-[11px] text-[var(--muted)] flex items-center gap-1.5 font-medium">
+                      <Layers size={14} className="opacity-50" /> Sinonimo: <b className="text-[var(--ink)] font-bold">{item.synonym}</b>
+                    </span>
+                    
+                    <div className="flex gap-2">
+                      <Button
+                        size="sm"
+                        variant={itemStatus === "learning" ? "secondary" : "ghost"}
+                        className={`h-8 px-3 rounded-lg text-[11px] font-bold uppercase tracking-wider ${itemStatus === "learning" ? "bg-[var(--amber)]/15 text-[var(--amber)] hover:bg-[var(--amber)]/25 border border-[var(--amber)]/20" : "hover:bg-[var(--amber)]/10 hover:text-[var(--amber)]"}`}
+                        disabled={!hydrated}
+                        onClick={() => setVocabularyStatus(item.id, itemStatus === "learning" ? "new" : "learning")}
+                      >
+                        <Sparkles size={13} className="mr-1.5" /> Studio
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant={itemStatus === "mastered" ? "secondary" : "ghost"}
+                        className={`h-8 px-3 rounded-lg text-[11px] font-bold uppercase tracking-wider ${itemStatus === "mastered" ? "bg-[var(--green)]/15 text-[var(--green)] hover:bg-[var(--green)]/25 border border-[var(--green)]/20" : "hover:bg-[var(--green)]/10 hover:text-[var(--green)]"}`}
+                        disabled={!hydrated}
+                        onClick={() => setVocabularyStatus(item.id, itemStatus === "mastered" ? "new" : "mastered")}
+                      >
+                        <Check size={13} className="mr-1.5" /> Fatto
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               );
             })}
           </div>

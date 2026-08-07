@@ -386,6 +386,42 @@ function ExerciseInput({
       </div>
     );
   }
+
+  if (exercise.type === "transformation") {
+    const parts = exercise.question.split(" → ");
+    if (parts.length === 2) {
+      const firstSentence = parts[0];
+      const match = parts[1].match(/^(.*?)___(.*?)\(([^)]+)\)$/);
+      if (match) {
+        const [, prefix, suffix, keyword] = match;
+        return (
+          <div className="transformation-box p-4 bg-slate-800/40 border border-slate-700/50 rounded-xl space-y-4">
+            <p className="text-sm font-medium text-slate-200">{firstSentence}</p>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-slate-400 font-semibold tracking-wider">KEY WORD:</span>
+              <Badge variant="neutral" className="text-emerald-400 border-emerald-400/30 bg-emerald-400/10 font-bold">{keyword}</Badge>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 text-sm text-slate-300">
+              {prefix.trim() && <span>{prefix.trim()}</span>}
+              <Input
+                value={answer}
+                onChange={(event) => setAnswer(event.target.value)}
+                disabled={disabled}
+                placeholder="2-5 parole..."
+                aria-label="Risposta per transformation"
+                className="w-48 text-center bg-slate-900 border-slate-700 focus:border-emerald-500 font-semibold text-emerald-400 placeholder:text-slate-600 placeholder:font-normal"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") event.preventDefault();
+                }}
+              />
+              {suffix.trim() && <span>{suffix.trim()}</span>}
+            </div>
+          </div>
+        );
+      }
+    }
+  }
+
   return (
     <Input
       value={answer}

@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/page-header";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExerciseRenderer } from "@/components/exercises/exercise-renderer";
+import { BatchExerciseRenderer } from "@/components/exercises/exercise-renderer";
 import { readingPassages } from "@/lib/data";
 
 export default function ReadingPage() {
@@ -39,11 +39,9 @@ export default function ReadingPage() {
               ))}
             </article>
             <aside className="reading-questions">
-              <ExerciseRenderer
+              <BatchExerciseRenderer
                 key={passage.id}
                 exercises={passage.exercises}
-                compact
-                enableModeSwitch
               />
             </aside>
           </div>

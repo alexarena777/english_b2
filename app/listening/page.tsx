@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { CheckCircle2, Headphones, ListMusic, Pause, Play, RotateCcw, Volume2 } from "lucide-react";
 import { AppPage } from "@/components/app-shell";
 import { PageHeader } from "@/components/page-header";
-import { ExerciseRenderer } from "@/components/exercises/exercise-renderer";
+import { ExerciseRenderer, BatchExerciseRenderer } from "@/components/exercises/exercise-renderer";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -47,7 +47,7 @@ export default function ListeningPage() {
   }
 
   function transcriptSegments(transcript: string) {
-    return transcript
+    const rawSegments = transcript
       .split(/(?=[A-Z][A-Za-z .'-]{1,24}:\s)/g)
       .map((part) => {
         const match = part.trim().match(/^([^:]{1,25}):\s*([\s\S]+)$/);
@@ -56,6 +56,31 @@ export default function ListeningPage() {
           : { speaker: "Narrator", text: part.trim() };
       })
       .filter((part) => part.text);
+
+    const finalSegments: { speaker: string; text: string }[] = [];
+    rawSegments.forEach((segment) => {
+      const sentences = segment.text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [segment.text];
+      let currentText = "";
+      sentences.forEach((s) => {
+        s = s.trim();
+        if (!s) return;
+        if (currentText.length + s.length > 180) {
+          if (currentText) {
+            finalSegments.push({ speaker: segment.speaker, text: currentText.trim() });
+            currentText = s;
+          } else {
+            finalSegments.push({ speaker: segment.speaker, text: s.slice(0, 180).trim() });
+            currentText = s.slice(180);
+          }
+        } else {
+          currentText += (currentText ? " " : "") + s;
+        }
+      });
+      if (currentText) {
+        finalSegments.push({ speaker: segment.speaker, text: currentText.trim() });
+      }
+    });
+    return finalSegments;
   }
 
   function playFallbackSpeech(fromIndex = 0) {
@@ -254,14 +279,10 @@ export default function ListeningPage() {
           {audioMessage && <p className="audio-warning">{audioMessage}</p>}
         </Card>
         <div>
-          <ExerciseRenderer
+          <BatchExerciseRenderer
             key={`${activity.id}-${practiceMode}`}
             exercises={activity.exercises}
-            compact
             onComplete={() => setShowTranscript(true)}
-            enableModeSwitch
-            mode={practiceMode}
-            onModeChange={changePracticeMode}
           />
           {showTranscript && (
             <Card className="transcript">

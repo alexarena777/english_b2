@@ -478,3 +478,113 @@ export function ReorderExercise({ exercise }: { exercise: Exercise }) {
 export function MatchingExercise({ exercise }: { exercise: Exercise }) {
   return <ExerciseRenderer exercises={[exercise]} />;
 }
+
+export function BatchExerciseRenderer({
+  exercises,
+  onComplete,
+}: {
+  exercises: Exercise[];
+  onComplete?: (score: number) => void;
+}) {
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [checked, setChecked] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+  const { recordAnswer } = useProgress();
+
+  useEffect(() => {
+    queueMicrotask(() => setHydrated(true));
+  }, []);
+
+  const corrections = useMemo(() => {
+    if (!checked) return [];
+    return exercises.map((ex) => {
+      const response = answers[ex.id] ?? "";
+      return {
+        exercise: ex,
+        answer: response,
+        correct: response.trim() ? evaluateAnswer(ex, response) : false,
+      };
+    });
+  }, [checked, answers, exercises]);
+
+  const score = useMemo(() => {
+    if (!checked) return null;
+    const correctCount = corrections.filter((c) => c.correct).length;
+    return Math.round((correctCount / exercises.length) * 100);
+  }, [checked, corrections, exercises]);
+
+  function submit() {
+    setChecked(true);
+    let correctCount = 0;
+    exercises.forEach((ex) => {
+      const response = answers[ex.id] ?? "";
+      const isCorrect = response.trim() ? evaluateAnswer(ex, response) : false;
+      if (isCorrect) correctCount++;
+      recordAnswer(ex, response, isCorrect, 30);
+    });
+    const finalScore = Math.round((correctCount / exercises.length) * 100);
+    onComplete?.(finalScore);
+  }
+
+  if (checked) {
+    const errors = corrections.filter((item) => !item.correct);
+    return (
+      <div className="flex flex-col gap-6">
+        <section className="exercise-complete" aria-live="polite">
+          <CheckCircle2 />
+          <span>ESERCIZIO COMPLETATO</span>
+          <h2>{score}% di accuratezza</h2>
+          <p>
+            Hai risposto correttamente a {corrections.filter(c => c.correct).length} domande su {exercises.length}.
+          </p>
+        </section>
+        {errors.length > 0 && (
+          <section className="simulation-corrections">
+            <div>
+              <span>CORREZIONE FINALE</span>
+              <h2>Rivedi le risposte da migliorare</h2>
+            </div>
+            {errors.map(({ exercise: item, answer: response }, correctionIndex) => (
+              <article key={item.id}>
+                <span>{correctionIndex + 1}</span>
+                <div>
+                  <h3>{item.question}</h3>
+                  <p>La tua risposta: <b>{response || "Non inserita"}</b></p>
+                  <p>Risposta corretta: <strong>{Array.isArray(item.correctAnswer) ? item.correctAnswer.join(" / ") : item.correctAnswer}</strong></p>
+                  <small>{item.explanation}</small>
+                </div>
+              </article>
+            ))}
+          </section>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-6">
+      {exercises.map((exercise, idx) => (
+        <div key={exercise.id} className="exercise-shell compact relative">
+          <div className="absolute top-4 right-4 flex items-center justify-center w-6 h-6 rounded-full bg-slate-800 text-slate-400 text-xs font-bold">
+            {idx + 1}
+          </div>
+          <div className="exercise-question pr-10">
+            <p>{examInstruction(exercise)}</p>
+            <h2>{exercise.question}</h2>
+          </div>
+          <ExerciseInput
+            exercise={exercise}
+            answer={answers[exercise.id] ?? ""}
+            setAnswer={(val) => setAnswers({ ...answers, [exercise.id]: val })}
+            disabled={!hydrated}
+          />
+        </div>
+      ))}
+      <div className="flex justify-end mt-4">
+        <Button onClick={submit} disabled={!hydrated} size="lg">
+          Controlla tutte le risposte <ArrowRight size={17} className="ml-2" />
+        </Button>
+      </div>
+    </div>
+  );
+}

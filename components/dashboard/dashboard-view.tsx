@@ -207,9 +207,9 @@ export function DashboardView() {
       <div className="dashboard-welcome curriculum-welcome">
         <div>
           <span className="page-eyebrow">IL TUO PERCORSO B2</span>
-          <h1>Quattro sezioni. Un obiettivo chiaro.</h1>
+          <h1>Cinque sezioni. Un obiettivo chiaro.</h1>
           <p>
-            Vocabolario, verbi, reading e listening: studia una sezione alla volta
+            Vocabolario, verbi, reading, listening e use of english: studia una sezione alla volta
             e lascia che i risultati reali costruiscano il tuo profilo.
           </p>
         </div>
@@ -234,7 +234,7 @@ export function DashboardView() {
           <p>
             {state.assessmentComplete
               ? `La stima usa ${learningProfile.evidenceCount} risposte e attività registrate.`
-              : "Il test contiene 28 domande oggettive nelle quattro sezioni e non include writing."}
+              : "Il test contiene domande oggettive nelle cinque sezioni e non include writing."}
           </p>
         </div>
         <Button asChild variant="outline">

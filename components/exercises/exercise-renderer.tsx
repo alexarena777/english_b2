@@ -410,7 +410,7 @@ export function ExerciseRenderer({
               ))}
             </section>
           )}
-          <h2 className="text-xl sm:text-2xl font-serif font-medium text-slate-100 leading-snug">
+          <h2 className="text-xl sm:text-2xl font-serif font-medium text-slate-800 dark:text-slate-100 leading-snug">
             {currentExercise.question}
           </h2>
         </div>
@@ -575,8 +575,8 @@ function ExerciseInput({
   if (exercise.type === "reorder") {
     const words = exercise.question.split(" ");
     return (
-      <div className="reorder-box p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
-        <div className="flex items-center gap-2 text-xs text-slate-400 font-medium">
+      <div className="reorder-box p-4 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3">
+        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium">
           <GripVertical size={16} />
           <p>{words.join(" · ")}</p>
         </div>
@@ -586,7 +586,7 @@ function ExerciseInput({
           disabled={disabled}
           placeholder="Riscrivi la frase nell’ordine corretto"
           aria-label="Risposta per riordinare"
-          className="bg-slate-950 border-slate-800 text-slate-100 h-11 rounded-lg"
+          className="bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 h-11 rounded-lg"
         />
       </div>
     );
@@ -600,15 +600,15 @@ function ExerciseInput({
       if (match) {
         const [, prefix, suffix, keyword] = match;
         return (
-          <div className="transformation-box p-4 bg-slate-900/80 border border-slate-800 rounded-xl space-y-4">
-            <p className="text-sm font-medium text-slate-200">{firstSentence}</p>
+          <div className="transformation-box p-4 bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl space-y-4">
+            <p className="text-sm font-medium text-slate-800 dark:text-slate-200">{firstSentence}</p>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-400 font-bold tracking-wider uppercase">KEY WORD:</span>
-              <Badge variant="neutral" className="text-emerald-400 border-emerald-500/30 bg-emerald-500/10 font-bold px-2.5 py-0.5">
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-bold tracking-wider uppercase">KEY WORD:</span>
+              <Badge variant="neutral" className="text-emerald-600 dark:text-emerald-400 border-emerald-500/20 dark:border-emerald-500/30 bg-emerald-500/5 dark:bg-emerald-500/10 font-bold px-2.5 py-0.5">
                 {keyword}
               </Badge>
             </div>
-            <div className="flex flex-wrap items-center gap-2 text-sm text-slate-300">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-slate-800 dark:text-slate-300">
               {prefix.trim() && <span>{prefix.trim()}</span>}
               <Input
                 value={answer}
@@ -616,7 +616,7 @@ function ExerciseInput({
                 disabled={disabled}
                 placeholder="2-5 parole..."
                 aria-label="Risposta per transformation"
-                className="w-full sm:w-56 text-center bg-slate-950 border-slate-800 focus:border-emerald-500 font-semibold text-emerald-400 placeholder:text-slate-600 placeholder:font-normal h-11 rounded-lg"
+                className="w-full sm:w-56 text-center bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 focus:border-emerald-500 font-semibold text-slate-900 dark:text-emerald-400 placeholder:text-slate-400 dark:placeholder:text-slate-600 placeholder:font-normal h-11 rounded-lg"
                 onKeyDown={(event) => {
                   if (event.key === "Enter") event.preventDefault();
                 }}

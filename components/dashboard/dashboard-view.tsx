@@ -28,6 +28,14 @@ import {
 import { verbTenseTopics } from "@/lib/curriculum/verbs";
 import { deriveLearningProfile } from "@/lib/learning-profile";
 import { todayKey } from "@/lib/utils";
+import React from "react";
+
+type GoalItemProps = {
+  label: string;
+  done: boolean;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number | string }>;
+  href: string;
+};
 
 function DailyGoalsWidget({ quotas }: { quotas?: { date: string; vocabulary: number; reading: number; listening: number } }) {
   const today = todayKey();
@@ -56,7 +64,7 @@ function DailyGoalsWidget({ quotas }: { quotas?: { date: string; vocabulary: num
   );
 }
 
-function GoalItem({ label, done, icon: Icon, href }: any) {
+function GoalItem({ label, done, icon: Icon, href }: GoalItemProps) {
   return (
     <Link href={href} className="block">
        <div className="flex flex-col items-center justify-center p-3 rounded-[14px] border text-center transition-colors" style={{ background: done ? 'color-mix(in srgb, var(--green) 12%, transparent)' : 'var(--card)', borderColor: done ? 'var(--green)' : 'var(--line)', opacity: done ? 0.7 : 1 }}>

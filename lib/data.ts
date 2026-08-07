@@ -7,7 +7,6 @@ import {
 import { b2ReadingPassages } from "./curriculum/reading";
 import { b2ListeningActivities } from "./curriculum/listening";
 import { universityGrammarExercises } from "./curriculum/university";
-import { universityExamExercises } from "./curriculum/uni-exam-data";
 
 const createdAt = "2026-07-01T00:00:00.000Z";
 type Seed = [string, string, string, string, string, string, string];

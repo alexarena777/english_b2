@@ -3,7 +3,6 @@ export const dynamic = "force-dynamic";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const text = searchParams.get("text")?.trim();
-  const lang = searchParams.get("lang")?.trim() ?? "en-GB";
 
   if (!text) {
     return new Response(JSON.stringify({ error: "Testo mancante" }), {

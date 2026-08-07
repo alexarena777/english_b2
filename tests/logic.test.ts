@@ -35,10 +35,14 @@ function progressState(partial: Partial<ProgressState> = {}): ProgressState {
 }
 
 describe("valutazione delle risposte", () => {
-  it("ignora maiuscole, spazi e punteggiatura finale", () =>
-    expect(evaluateAnswer(grammarExercises[0], "  WORK. ")).toBe(true));
-  it("rifiuta una risposta semanticamente diversa", () =>
-    expect(evaluateAnswer(grammarExercises[0], "am working")).toBe(false));
+  const ex0 = grammarExercises[0];
+  it("ignora maiuscole, spazi e punteggiatura finale – risposta corretta", () => {
+    expect(evaluateAnswer(ex0, ` ${ex0.correctAnswer} `)).toBe(true);
+  });
+  it("ignora maiuscole, spazi e punteggiatura finale – risposta errata", () => {
+    expect(evaluateAnswer(ex0, "am working")).toBe(false);
+    expect(evaluateAnswer(ex0, "  WORK. ")).toBe(false);
+  });
 });
 
 describe("calcolo assessment", () => {

@@ -65,7 +65,7 @@ export default function ExamPage() {
         <div><span>MIGLIOR RISULTATO</span><strong>{best}%</strong><small>{best >= 78 ? "soglia B2 raggiunta" : "obiettivo: 78%"}</small></div>
       </div>
       <div className="exam-grid">
-        {exams.map((exam, index) => (
+        {exams.map((exam) => (
           <Card className={`exam-card ${exam.id === "full-1" ? "featured" : ""}`} key={exam.id}>
             {exam.id === "full-1" && <Badge variant="success">PROVA ESTESA</Badge>}
             {exam.id === "uni-1" && <Badge variant="neutral">UFFICIALE</Badge>}

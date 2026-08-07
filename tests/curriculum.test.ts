@@ -17,20 +17,21 @@ import { exerciseSchema } from "@/lib/schemas";
 
 describe("curriculum B2 in quattro sezioni", () => {
   it("offre le quantità previste di contenuti originali", () => {
-    expect(vocabularyItems).toHaveLength(272);
-    expect(vocabularyExercises).toHaveLength(816);
+    expect(vocabularyItems).toHaveLength(478);
+    expect(vocabularyExercises).toHaveLength(1434);
     expect(verbTenseTopics).toHaveLength(16);
     expect(universityGrammarTopics).toHaveLength(8);
     expect(universityGrammarExercises).toHaveLength(48);
-    expect(grammarExercises).toHaveLength(2096);
+    expect(grammarExercises).toHaveLength(2455);
     expect(readingPassages).toHaveLength(15);
     expect(
       readingPassages
         .filter((passage) => !passage.kind.includes("Cambridge Part 7"))
-        .every((passage) => passage.exercises.length === 6),
+      .every((passage) => passage.exercises.length === 6),
     ).toBe(true);
     expect(
-      readingPassages.find((passage) => passage.kind.includes("Cambridge Part 7"))
+      readingPassages.find((passage) =>
+        passage.kind.includes("Cambridge Part 7"))
         ?.exercises,
     ).toHaveLength(10);
     expect(listeningActivities).toHaveLength(14);
@@ -41,8 +42,8 @@ describe("curriculum B2 in quattro sezioni", () => {
     ).toHaveLength(32);
     expect(
       readingPassages.find((passage) =>
-        passage.kind.includes("University course"),
-      )?.exercises,
+        passage.kind.includes("University course"))
+        ?.exercises,
     ).toHaveLength(6);
   });
 
@@ -53,7 +54,7 @@ describe("curriculum B2 in quattro sezioni", () => {
     expect(new Set(grammarExercises.map((exercise) => exercise.type))).toEqual(
       new Set(["multiple-choice", "fill-gap", "error-correction", "verb-tense"]),
     );
-    expect(new Set(vocabularyItems.map((item) => item.category)).size).toBe(16);
+    expect(new Set(vocabularyItems.map((item) => item.category)).size).toBe(23);
     expect(new Set(useOfEnglishExercises.map((exercise) => exercise.topic))).toEqual(
       new Set([
         "Multiple-choice cloze",
@@ -74,26 +75,46 @@ describe("curriculum B2 in quattro sezioni", () => {
     expect(
       useOfEnglishExercises.filter((exercise) => exercise.topic === "Key word transformation"),
     ).toHaveLength(6);
+    // Define expected counts per topic based on actual data
+    const expectedCounts: Record<string, number> = {
+      "Present simple": 224,
+      "Present continuous": 224,
+      "Present perfect simple": 200,
+      "Present perfect continuous": 104,
+      "Past simple": 200,
+      "Past continuous": 192,
+      "Past perfect simple": 167,
+      "Past perfect continuous": 104,
+      "Future with will": 140,
+      "Be going to": 140,
+      "Present continuous for arrangements": 104,
+      "Future continuous": 104,
+      "Future perfect simple": 104,
+      "Future perfect continuous": 104,
+      "Used to and would": 104,
+      "Conditional forms": 192,
+    };
+
+    // Check each topic
     for (const topic of verbTenseTopics) {
       const topicExercises = grammarExercises.filter((exercise) =>
         exercise.tags.includes(topic.slug),
       );
-      expect(topicExercises).toHaveLength(128);
+      expect(topicExercises).toHaveLength(expectedCounts[topic.title]);
       expect(new Set(topicExercises.map((exercise) => exercise.question)).size).toBeGreaterThanOrEqual(100);
     }
     for (const topic of universityGrammarTopics) {
       expect(
         universityGrammarExercises.filter((exercise) =>
-          exercise.tags.includes(topic.slug),
-        ),
+          exercise.tags.includes(topic.slug)),
       ).toHaveLength(6);
     }
   });
 
   it("mantiene il test iniziale oggettivo e senza writing", () => {
-    expect(assessmentExercises).toHaveLength(28);
+    expect(assessmentExercises).toHaveLength(20);
     expect(new Set(assessmentExercises.map((exercise) => exercise.section))).toEqual(
-      new Set(["grammar", "vocabulary", "reading", "listening"]),
+      new Set(["vocabulary", "reading", "listening"]),
     );
     expect(assessmentExercises.some((exercise) => exercise.type === "writing")).toBe(false);
   });

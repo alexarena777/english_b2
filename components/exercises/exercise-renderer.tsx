@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, Clock3, GraduationCap, GripVertical, RotateCcw, TimerReset } from "lucide-react";
+import confetti from "canvas-confetti";
 import type { Exercise, PracticeMode } from "@/lib/types";
 import { evaluateAnswer } from "@/lib/logic";
 import { useProgress } from "@/components/providers";
@@ -88,6 +89,35 @@ export function ExerciseRenderer({
     sessionStartedAt.current = Date.now();
     queueMicrotask(() => setHydrated(true));
   }, []);
+
+  useEffect(() => {
+    if (finishedScore === 100) {
+      const duration = 2000;
+      const end = Date.now() + duration;
+
+      const frame = () => {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ["#26816a", "#183a2e", "#f5f4ee", "#ffd460"]
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ["#26816a", "#183a2e", "#f5f4ee", "#ffd460"]
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      };
+      frame();
+    }
+  }, [finishedScore]);
 
   if (!exercise) {
     return (

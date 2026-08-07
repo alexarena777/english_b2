@@ -37,7 +37,8 @@ export default function VocabularyPage() {
   const [training, setTraining] = useState(false);
   const [sessionKey, setSessionKey] = useState(0);
   const [practiceSession, setPracticeSession] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(48);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 24;
   const [now, setNow] = useState(0);
   useEffect(() => {
     queueMicrotask(() => setNow(Date.now()));
@@ -228,15 +229,15 @@ export default function VocabularyPage() {
                 value={query}
                 onChange={(event) => {
                   setQuery(event.target.value);
-                  setVisibleCount(48);
+                  setCurrentPage(1);
                 }}
                 placeholder="Cerca una parola o una traduzione…"
               />
             </label>
-            <select value={category} onChange={(event) => { setCategory(event.target.value); setVisibleCount(48); }} aria-label="Filtra per tema">
+            <select value={category} onChange={(event) => { setCategory(event.target.value); setCurrentPage(1); }} aria-label="Filtra per tema">
               {categories.map((item) => <option key={item} value={item}>{item === "all" ? "Tutti i temi" : item}</option>)}
             </select>
-            <select value={status} onChange={(event) => { setStatus(event.target.value as StatusFilter); setVisibleCount(48); }} aria-label="Filtra per stato">
+            <select value={status} onChange={(event) => { setStatus(event.target.value as StatusFilter); setCurrentPage(1); }} aria-label="Filtra per stato">
               <option value="all">Tutti gli stati</option>
               <option value="new">Nuove</option>
               <option value="learning">In apprendimento</option>
@@ -270,7 +271,7 @@ export default function VocabularyPage() {
           </Card>
 
           <div className="vocab-grid">
-            {filtered.slice(0, visibleCount).map((item) => {
+            {filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE).map((item) => {
               const progress = progressMap.get(item.id);
               const itemStatus = progress?.status ?? "new";
               return (
@@ -306,12 +307,32 @@ export default function VocabularyPage() {
               );
             })}
           </div>
-          {filtered.length > visibleCount && (
-            <div className="vocab-load-more">
-              <Button variant="outline" onClick={() => setVisibleCount((value) => value + 48)}>
-                Mostra altre parole
+          
+          {Math.ceil(filtered.length / ITEMS_PER_PAGE) > 1 && (
+            <div className="flex items-center justify-center gap-6 my-10">
+              <Button 
+                variant="outline" 
+                disabled={currentPage === 1}
+                onClick={() => {
+                  setCurrentPage(p => p - 1);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Precedente
               </Button>
-              <span>{visibleCount} di {filtered.length} visualizzate</span>
+              <span className="text-sm font-medium text-slate-400">
+                Pagina {currentPage} di {Math.ceil(filtered.length / ITEMS_PER_PAGE)}
+              </span>
+              <Button 
+                variant="outline" 
+                disabled={currentPage === Math.ceil(filtered.length / ITEMS_PER_PAGE)}
+                onClick={() => {
+                  setCurrentPage(p => p + 1);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Successiva
+              </Button>
             </div>
           )}
           {!filtered.length && <div className="state-box"><h3>Nessuna parola trovata</h3><p>Prova un termine, un tema o uno stato diverso.</p></div>}

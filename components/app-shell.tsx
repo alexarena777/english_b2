@@ -16,7 +16,6 @@ const studyNav = [
   { href: "/reading", label: "Reading", icon: BrainCircuit },
   { href: "/listening", label: "Listening", icon: Headphones },
   { href: "/use-of-english", label: "Use of English", icon: FileCheck2 },
-  { href: "/writing", label: "Writing", icon: PenTool },
 ];
 const progressNav = [
   { href: "/assessment", label: "Test iniziale", icon: ClipboardCheck },

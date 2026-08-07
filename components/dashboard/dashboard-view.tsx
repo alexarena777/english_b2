@@ -166,25 +166,13 @@ export function DashboardView() {
       icon: FileCheck2,
       tone: "amber",
     },
-    {
-      href: "/writing",
-      label: "06 · WRITING",
-      title: "Padroneggia la scrittura B2",
-      description:
-        "Tracce in stile esame (essay, article, email) con simulazione e correzione assistita.",
-      facts: `${state.writingSubmissions.length} testi valutati`,
-      attempted: state.writingSubmissions.length,
-      total: 15,
-      icon: PenTool,
-      tone: "mint",
-    },
   ];
 
   return (
     <>
       <DailyGoalsWidget quotas={state.dailyQuotas} />
       
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-6" aria-busy={!hydrated}>
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 mb-6" aria-busy={!hydrated}>
         {sections.map((section) => {
           const progress = section.total
             ? Math.min(100, Math.round((section.attempted / section.total) * 100))

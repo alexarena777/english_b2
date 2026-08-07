@@ -190,7 +190,9 @@ export function DashboardView() {
                 <h2 style={{ fontSize: '15px', marginTop: '12px', marginBottom: '8px', lineHeight: '1.2' }}>{section.title}</h2>
                 
                 <footer style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'stretch' }}>
-                  <Progress value={progress} className="h-1.5" />
+                  <div style={{ height: '6px', borderRadius: '4px', overflow: 'hidden' }}>
+                    <Progress value={progress} />
+                  </div>
                   <div className="flex justify-between items-center w-full">
                     <small style={{ fontSize: '10px' }}>{progress}%</small>
                     <ArrowRight size={14} className="opacity-50" />

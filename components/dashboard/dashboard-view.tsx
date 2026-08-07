@@ -184,7 +184,7 @@ export function DashboardView() {
     <>
       <DailyGoalsWidget quotas={state.dailyQuotas} />
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6" aria-busy={!hydrated}>
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-6" aria-busy={!hydrated}>
         {sections.map((section) => {
           const progress = section.total
             ? Math.min(100, Math.round((section.attempted / section.total) * 100))
@@ -192,18 +192,21 @@ export function DashboardView() {
           const Icon = section.icon;
           return (
             <Link href={section.href} key={section.href}>
-              <Card className={`curriculum-section-card ${section.tone}`}>
-                <header>
-                  <span>{section.label}</span>
-                  <i><Icon /></i>
+              <Card className={`curriculum-section-card ${section.tone}`} style={{ minHeight: '180px', padding: '16px' }}>
+                <header style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}>
+                  <i style={{ width: '38px', height: '38px', borderRadius: '10px' }}>
+                    <Icon size={20} />
+                  </i>
+                  <span style={{ fontSize: '9px' }}>{section.label.split('·')[1].trim()}</span>
                 </header>
-                <h2>{section.title}</h2>
-                <p>{section.description}</p>
-                <strong>{section.facts}</strong>
-                <footer>
-                  <Progress value={progress} />
-                  <small>{section.attempted} completati · {progress}%</small>
-                  <ArrowRight size={18} />
+                <h2 style={{ fontSize: '15px', marginTop: '12px', marginBottom: '8px', lineHeight: '1.2' }}>{section.title}</h2>
+                
+                <footer style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'stretch' }}>
+                  <Progress value={progress} className="h-1.5" />
+                  <div className="flex justify-between items-center w-full">
+                    <small style={{ fontSize: '10px' }}>{progress}%</small>
+                    <ArrowRight size={14} className="opacity-50" />
+                  </div>
                 </footer>
               </Card>
             </Link>

@@ -15,6 +15,7 @@ import {
   listeningActivities,
   readingPassages,
   vocabularyItems,
+  useOfEnglishExercises,
 } from "@/lib/data";
 
 const sections = [
@@ -44,6 +45,14 @@ const sections = [
   },
   {
     number: "04",
+    title: "Use of English",
+    detail: `${useOfEnglishExercises.length} test Cambridge (Cloze, Word Formation)`,
+    href: "/use-of-english",
+    icon: Sparkles,
+    tone: "purple",
+  },
+  {
+    number: "05",
     title: "Listening",
     detail: `${listeningActivities.length} prove audio con due ascolti`,
     href: "/listening",
@@ -79,8 +88,8 @@ export default function Home() {
             <span>una competenza alla volta.</span>
           </h1>
           <p>
-            Un percorso concentrato su quattro aree: il lessico che serve davvero,
-            tutti i tempi verbali, reading completi e listening in stile esame.
+            Un percorso concentrato su cinque aree: il lessico che serve davvero,
+            tutti i tempi verbali, Use of English Cambridge, reading completi e listening in stile esame.
           </p>
           <div className="hero-actions">
             <Button asChild size="lg">
@@ -99,10 +108,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="four-path-preview" aria-label="Le quattro sezioni del percorso">
+        <div className="four-path-preview" aria-label="Le cinque sezioni del percorso">
           <header>
             <span>IL PERCORSO COMPLETO</span>
-            <b>4 sezioni</b>
+            <b>5 sezioni</b>
           </header>
           {sections.map((section) => {
             const Icon = section.icon;
@@ -124,7 +133,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="landing-four-pillars" aria-label="Contenuti del percorso">
+      <section className="landing-pillars" aria-label="Contenuti del percorso">
         {sections.map((section) => {
           const Icon = section.icon;
           return (

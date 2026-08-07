@@ -76,6 +76,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   </div>;
 }
 
-function NavItem({ href, label, icon: Icon, active, mobile = false }: { href: string; label: string; icon: typeof House; active: boolean; mobile?: boolean }) { return <Link className={cn(mobile ? "mobile-nav-item" : "nav-item", active && "active")} href={href} aria-current={active ? "page" : undefined}><Icon size={mobile ? 21 : 18} /><span>{mobile && label === "Verbi e tempi" ? "Verbi" : label}</span></Link>; }
+function NavItem({ href, label, icon: Icon, active, mobile = false }: { href: string; label: string; icon: typeof House; active: boolean; mobile?: boolean }) {
+  const displayLabel = useMemo(() => {
+    if (!mobile) return label;
+    if (label === "Verbi e tempi") return "Verbi";
+    if (label === "Vocabolario") return "Vocaboli";
+    if (label === "Use of English") return "U.o.E.";
+    return label;
+  }, [mobile, label]);
+  return <Link className={cn(mobile ? "mobile-nav-item" : "nav-item", active && "active")} href={href} aria-current={active ? "page" : undefined}><Icon size={mobile ? 20 : 18} /><span>{displayLabel}</span></Link>;
+}
 
 export function AppPage({ children }: { children: React.ReactNode }) { return <AppShell>{children}</AppShell>; }

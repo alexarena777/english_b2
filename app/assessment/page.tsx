@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, BarChart3, ClipboardCheck, Headphones, Play, RotateCcw, Target } from "lucide-react";
+import { ArrowRight, BarChart3, ClipboardCheck, Clock3, Headphones, Play, RotateCcw, Target } from "lucide-react";
 import { Brand } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -25,6 +25,7 @@ export default function AssessmentPage() {
   const [answers, setAnswers] = useState<UserAnswer[]>([]);
   const [done, setDone] = useState(false);
   const [draft, setDraft] = useState<Draft | null>(null);
+  const [timeLeft, setTimeLeft] = useState(1800); // 30 minutes
   const { recordAnswer, updateProfile } = useProgress();
   const exercise = assessmentExercises[index];
   const result = done ? calculateAssessment(answers) : null;
@@ -42,6 +43,14 @@ export default function AssessmentPage() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (!started || done) return;
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [started, done]);
 
   useEffect(() => () => window.speechSynthesis?.cancel(), []);
 
@@ -208,17 +217,27 @@ export default function AssessmentPage() {
     );
   }
 
+  const minutes = Math.floor(Math.max(0, timeLeft) / 60);
+  const seconds = Math.max(0, timeLeft) % 60;
+  const timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
   return (
     <main className="assessment-run">
-      <header>
+      <header className="relative flex items-center justify-between w-full">
         <Brand compact />
-        <div>
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
           <span>{exercise.section}</span>
           <b>
             Domanda {index + 1} di {assessmentExercises.length}
           </b>
         </div>
-        <button onClick={() => setStarted(false)}>Esci e salva</button>
+        <div className="flex items-center gap-4">
+          <div className={`flex items-center gap-1.5 font-mono text-sm px-3 py-1.5 rounded-md transition-colors ${timeLeft <= 300 ? 'bg-red-500/10 text-red-500 font-bold animate-pulse' : 'bg-slate-800 text-slate-300 border border-slate-700'}`}>
+            <Clock3 size={14} />
+            {timeString}
+          </div>
+          <button onClick={() => setStarted(false)}>Esci e salva</button>
+        </div>
       </header>
       <Progress value={(index / assessmentExercises.length) * 100} />
       <section>

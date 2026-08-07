@@ -298,7 +298,7 @@ export default function VocabularyPage() {
                   <p className="text-[var(--muted)] text-[13px] leading-relaxed mb-4">{item.definition}</p>
                   
                   <blockquote className="relative p-3.5 rounded-xl bg-black/5 dark:bg-white/5 border-l-4 border-[var(--green)] text-[13px] italic text-[var(--muted)] mb-5">
-                    "{item.example}"
+                    &quot;{item.example}&quot;
                   </blockquote>
                   
                   <div className="mt-auto pt-4 border-t border-[var(--line)] flex items-center justify-between">

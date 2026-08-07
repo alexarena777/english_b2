@@ -31,11 +31,14 @@ export function FlashcardDeck({
   const [shuffledCards, setShuffledCards] = useState<CardItem[]>(cards);
   const { speak, isPlaying } = useSpeechSynthesis();
 
-  useEffect(() => {
+  const [prevCards, setPrevCards] = useState(cards);
+
+  if (cards !== prevCards) {
+    setPrevCards(cards);
     setShuffledCards(cards);
     setCurrentIndex(0);
     setIsFlipped(false);
-  }, [cards]);
+  }
 
   const currentCard = shuffledCards[currentIndex];
 

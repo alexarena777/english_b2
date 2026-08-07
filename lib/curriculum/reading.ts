@@ -362,8 +362,6 @@ export const b2ReadingPassages: ReadingPassage[] = [
       question("reading-weather-q6", "reading-community-weather-stations", "purpose", "Why does the team publish a monthly story?", ["To sell the recorded information", "To keep volunteers interested and connect figures to questions", "To prevent schools from using the website", "To avoid repairing damaged equipment"], "To keep volunteers interested and connect figures to questions", "The stories and student questions are presented as ways to maintain involvement."),
     ],
   },
-
-  },
   {
     id: "reading-remote-work-psychology",
     title: "The Psychology of Remote Work and Productivity",
